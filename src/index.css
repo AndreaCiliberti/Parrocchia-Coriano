@@ -1,0 +1,45 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+  --color-primary: #1C244B;
+  --color-secondary: #F3F5F8;
+  --color-text: #324A6D;
+  --color-accent: #467FF7;
+  --color-accent-hover: #336de6;
+  --color-ice: #CDE4E7;
+  --color-sky: #B4D4DC;
+  --color-soft: #F9FAFD;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', 'Inter', system-ui, -apple-system, sans-serif;
+  color: #324A6D;
+  background-color: #ffffff;
+}
+
+/* Authentic Elementor pill-shaped button style */
+.btn-elementor {
+  background-color: #467FF7;
+  color: #ffffff;
+  border-radius: 9999px;
+  padding: 12px 35px;
+  font-size: 15px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(70, 127, 247, 0.25);
+}
+
+.btn-elementor:hover {
+  background-color: #336de6;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(70, 127, 247, 0.35);
+}

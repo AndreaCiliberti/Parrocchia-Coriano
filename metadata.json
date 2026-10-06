@@ -1,0 +1,7 @@
+{
+  "name": "Parrocchia Coriano",
+  "description": "Sito ufficiale della Parrocchia di Coriano - Santa Maria Assunta (Santuario del SS. Crocifisso), orari delle Sante Messe, avvisi della comunità e attività pastorali.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
