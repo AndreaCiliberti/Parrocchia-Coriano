@@ -4,7 +4,8 @@ export type PageId =
   | 'avvisi' 
   | 'immagini-da-una-comunita' 
   | 'vita-comunita' 
-  | 'comunita-parrocchiale' 
+  | 'comunita-parrocchiale'
+  | 'storia'
   | 'contatti'
   | 'privacy'
   | 'cookie-policy';
@@ -42,4 +43,59 @@ export interface DaySchedule {
     time: string;
     activity: string;
   }[];
+}
+
+export interface StoriaImage {
+  src: string;
+  caption: string;
+}
+
+export type StoriaBlock =
+  | { type: 'p'; text: string }
+  | { type: 'quote'; text: string; author?: string }
+  | { type: 'list'; heading?: string; items: { title?: string; text: string }[] };
+
+export interface StoriaSection {
+  id: string;
+  title: string;
+  blocks: StoriaBlock[];
+  images?: StoriaImage[];
+}
+
+export interface StoriaChapter {
+  id: string;
+  number: string;
+  title: string;
+  intro?: string[];
+  sections: StoriaSection[];
+}
+
+export interface StoriaMilestone {
+  year: string;
+  text: string;
+}
+
+export type StoriaLang = 'it' | 'en';
+
+export interface StoriaContent {
+  heroImage: StoriaImage;
+  milestones: StoriaMilestone[];
+  chapters: StoriaChapter[];
+  ui: {
+    eyebrow: string;
+    title: string;
+    intro: string;
+    milestonesTitle: string;
+    chaptersNavLabel: string;
+    chapterLabel: string;
+    outroTitle: string;
+    outroText: string;
+    massTimes: string;
+    contacts: string;
+    zoom: string;
+    close: string;
+    // Button that switches to the other language
+    switchLabel: string;
+    switchAria: string;
+  };
 }

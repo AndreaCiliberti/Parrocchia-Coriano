@@ -13,6 +13,7 @@ import { AvvisiPage } from './pages/AvvisiPage';
 import { ImmaginiComunitaPage } from './pages/ImmaginiComunitaPage';
 import { VitaComunitaPage } from './pages/VitaComunitaPage';
 import { ComunitaParrocchialePage } from './pages/ComunitaParrocchialePage';
+import { StoriaPage } from './pages/StoriaPage';
 import { ContattiPage } from './pages/ContattiPage';
 import { LegalPage } from './pages/LegalPage';
 import { PRIVACY_POLICY_HTML, COOKIE_POLICY_HTML } from './data/legalContent';
@@ -31,6 +32,7 @@ export default function App() {
         'immagini-da-una-comunita',
         'vita-comunita',
         'comunita-parrocchiale',
+        'storia',
         'contatti',
         'privacy',
         'cookie-policy',
@@ -75,6 +77,9 @@ export default function App() {
         )}
         {currentPage === 'comunita-parrocchiale' && (
           <ComunitaParrocchialePage onNavigate={handleNavigate} />
+        )}
+        {currentPage === 'storia' && (
+          <StoriaPage onNavigate={handleNavigate} />
         )}
         {currentPage === 'contatti' && (
           <ContattiPage onNavigate={handleNavigate} />

@@ -16,6 +16,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
     { id: 'immagini-da-una-comunita', label: 'Immagini di comunità' },
     { id: 'vita-comunita', label: 'Vita comunità' },
     { id: 'comunita-parrocchiale', label: 'Comunità parrocchiale' },
+    { id: 'storia', label: 'Storia' },
     { id: 'contatti', label: 'Contatti' },
   ];
 
