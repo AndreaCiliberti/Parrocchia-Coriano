@@ -14,6 +14,8 @@ import { ImmaginiComunitaPage } from './pages/ImmaginiComunitaPage';
 import { VitaComunitaPage } from './pages/VitaComunitaPage';
 import { ComunitaParrocchialePage } from './pages/ComunitaParrocchialePage';
 import { ContattiPage } from './pages/ContattiPage';
+import { LegalPage } from './pages/LegalPage';
+import { PRIVACY_POLICY_HTML, COOKIE_POLICY_HTML } from './data/legalContent';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
@@ -30,6 +32,8 @@ export default function App() {
         'vita-comunita',
         'comunita-parrocchiale',
         'contatti',
+        'privacy',
+        'cookie-policy',
       ];
       if (validPages.includes(hash as PageId)) {
         setCurrentPage(hash as PageId);
@@ -74,6 +78,12 @@ export default function App() {
         )}
         {currentPage === 'contatti' && (
           <ContattiPage onNavigate={handleNavigate} />
+        )}
+        {currentPage === 'privacy' && (
+          <LegalPage title="Informativa Privacy" html={PRIVACY_POLICY_HTML} />
+        )}
+        {currentPage === 'cookie-policy' && (
+          <LegalPage title="Cookie Policy" html={COOKIE_POLICY_HTML} />
         )}
       </main>
 

@@ -12,13 +12,6 @@ export const OrariPage: React.FC<OrariPageProps> = ({ onNavigate }) => {
       <div className="max-w-4xl mx-auto space-y-12">
         {/* Header with authentic icon and title */}
         <div className="text-center space-y-4">
-          <div className="flex justify-center mb-4">
-            <img
-              src="/images/messa-quadrata.png"
-              alt="Orari Messe"
-              className="w-24 h-24 sm:w-28 sm:h-28 object-contain"
-            />
-          </div>
           <h1 className="font-sans font-bold text-3xl sm:text-5xl text-[#1C244B]">
             Orari Messe Zona Pastorale
           </h1>

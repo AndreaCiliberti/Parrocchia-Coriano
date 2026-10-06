@@ -5,7 +5,9 @@ export type PageId =
   | 'immagini-da-una-comunita' 
   | 'vita-comunita' 
   | 'comunita-parrocchiale' 
-  | 'contatti';
+  | 'contatti'
+  | 'privacy'
+  | 'cookie-policy';
 
 export interface MassTime {
   churchName: string;

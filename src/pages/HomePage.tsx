@@ -20,8 +20,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="font-sans text-[#324A6D] bg-white">
       {/* 1. HERO SECTION */}
-      <section className="bg-gradient-to-b from-[#F3F5F8] to-white py-12 lg:py-20 px-4 sm:px-6 lg:px-8 border-b border-gray-100">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+      <section className="bg-gradient-to-b from-[#F3F5F8] to-white py-16 lg:py-24 px-4 sm:px-6 lg:px-8 border-b border-gray-100 flex items-center min-h-[calc(85svh-5rem)] lg:min-h-[calc(100svh-5rem)]">
+        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
           {/* Left Column */}
           <div className="space-y-6">
             <h1 className="font-sans font-bold text-3xl sm:text-4xl lg:text-5xl text-[#1C244B] leading-tight">

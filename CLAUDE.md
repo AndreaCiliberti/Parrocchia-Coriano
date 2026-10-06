@@ -1,0 +1,69 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Project
+
+Website for the Parrocchia S. Maria Assunta di Coriano (RN): Mass times, notices, community groups, contacts. All user-facing content is in Italian. The project was scaffolded from a Google AI Studio template (see `metadata.json`, `.env.example`).
+
+## Commands
+
+```bash
+npm install
+npm run dev       # Vite dev server on http://localhost:3000 (binds 0.0.0.0)
+npm run build     # production build to dist/
+npm run preview   # serve the built dist/
+npm run lint      # type-check only (tsc --noEmit); there is no ESLint
+```
+
+There is no test suite.
+
+## Architecture
+
+- **Stack:** React 19 + TypeScript, Vite, Tailwind CSS v4 (via `@tailwindcss/vite`, no `tailwind.config`), `lucide-react` icons.
+- **Routing is hand-rolled, not a router library.** `src/App.tsx` holds `currentPage: PageId` in state and syncs it with `window.location.hash` (e.g. `#avvisi`). Every page and the `Navbar`/`Footer` receive an `onNavigate(page)` prop. Adding a page requires: a new member of the `PageId` union in `src/types/index.ts`, an entry in the `validPages` list and a render branch in `App.tsx`, and a link in `Navbar`/`Footer`.
+- **Content lives in `src/data/siteData.ts`** (site info, prefestive/festive Mass lists, weekly schedule, community groups, photo lists), typed by interfaces in `src/types/index.ts`. Update content there rather than hardcoding it in page components.
+- **Images:** site photos are served from `public/images/` and referenced by absolute path (`/images/foo.jpg`). Many have WordPress-style size variants (`-300x200`, `-1024x682`) carried over from the original site.
+- **Styling:** brand tokens are defined in the `@theme` block of `src/index.css` (`primary #1C244B`, `text #324A6D`, `accent #467FF7`, etc.), alongside a `.btn-elementor` pill-button class that mimics the original Elementor site. Components often use raw hex values in Tailwind arbitrary classes (`text-[#324A6D]`); keep to the same palette. Fonts (Poppins, Inter) load from Google Fonts in `index.html`.
+- The `@/` import alias maps to the repo root (not `src/`).
+
+## Architettura operativa a 3 livelli (DOE)
+
+Lavora come un sistema di agenti specializzati, con tre livelli che separano le responsabilità.
+
+### Livello 1: Direttive (cosa fare)
+
+I file `AGENT.md` e `SKILL.md` sono le direttive: SOP in linguaggio naturale da seguire come istruzioni precise.
+
+- Agenti e skill sono **cartelle di 1° livello nella root** (nessun contenitore `agents/` o `skills/`): prefisso `Agente` (es. `Agente Business Consultant/`) e prefisso `Skill` (es. `Skill Preventivo/`).
+- L'utente li richiama con la funzione **@** (es. `@Agente Business Consultant, @Skill Preventivo: [cosa fare]`). Quando ricevi una @-cartella, leggi il suo `.md` principale; con agente + skill leggi `AGENT.md` e `SKILL.md` e lavora seguendo le istruzioni combinate.
+
+### Livello 2: Orchestrazione (decisioni): sei tu
+
+Fai routing intelligente: leggi le direttive, chiama gli strumenti di esecuzione nell'ordine giusto, gestisci gli errori, chiedi chiarimenti quando serve, aggiorna le direttive con ciò che impari.
+
+### Livello 3: Esecuzione (fare il lavoro)
+
+Script Python deterministici in `execution/`. Usa script invece di lavoro manuale: se uno script esiste già usalo, altrimenti crealo, testalo e salvalo per il futuro.
+
+### Principi operativi
+
+1. **Controlla prima i tool esistenti** in `execution/`; crea nuovi script solo se non ne esistono.
+2. **Auto-correggiti:** leggi l'errore, correggi, testa, aggiorna la direttiva con ciò che hai imparato. Se servono token o crediti a pagamento, chiedi prima all'utente.
+3. **Aggiorna le direttive:** sono documenti vivi. Quando scopri vincoli, approcci migliori o errori comuni, proponi l'aggiornamento; non sovrascrivere senza chiedere.
+
+### Organizzazione file
+
+- `execution/`: script Python (tool deterministici)
+- `.tmp/`: file intermedi, sempre rigenerabili, mai committare
+- `.env`: chiavi API e credenziali
+- `output/`: deliverable finali. Ogni agente salva nella cartella che corrisponde alla seconda parte del suo nome (es. `Agente Business Consultant` → `output/Business Consultant/`)
+
+Queste cartelle (e `context/info-azienda.md`, da leggere sempre prima di operare se presente) non esistono ancora in questo repo: creale quando servono. Per il sito web lo stack resta quello descritto sopra (Vite + React + Tailwind), non Next.js. Se esiste `brand-guidelines.md` nella root, consultalo.
+
+## Notes
+
+- Deployment: code on GitHub, hosted on Vercel (not WordPress/SiteGround like the old site). The privacy and cookie texts in `src/data/legalContent.ts` (pages `#privacy`, `#cookie-policy`, rendered by `src/pages/LegalPage.tsx`) must stay consistent with the third-party services the site actually uses.
+
+- `vite.config.ts` disables HMR/file watching when `DISABLE_HMR=true` (AI Studio behaviour); leave that block as is.
+- `@google/genai`, `express`, `dotenv` and `GEMINI_API_KEY` are template leftovers: nothing in `src/` uses them yet.

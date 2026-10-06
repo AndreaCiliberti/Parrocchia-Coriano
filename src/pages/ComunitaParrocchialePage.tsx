@@ -12,13 +12,6 @@ export const ComunitaParrocchialePage: React.FC<ComunitaParrocchialePageProps> =
       <div className="max-w-5xl mx-auto space-y-16">
         {/* Header */}
         <div className="text-center space-y-4">
-          <div className="flex justify-center mb-2">
-            <img
-              src="/images/giovani-quadrata.png"
-              alt="Comunità Parrocchiale"
-              className="w-24 h-24 object-contain"
-            />
-          </div>
           <h1 className="font-sans font-bold text-3xl sm:text-5xl text-[#1C244B]">
             Comunità Parrocchia Coriano
           </h1>

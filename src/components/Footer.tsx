@@ -81,14 +81,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h3>
             <ul className="space-y-2 text-[#324A6D]">
               <li>
-                <a href="#privacy" className="hover:text-[#467FF7] transition-colors">
+                <button
+                  onClick={() => handleNav('privacy')}
+                  className="hover:text-[#467FF7] transition-colors cursor-pointer text-left"
+                >
                   Informativa Privacy
-                </a>
+                </button>
               </li>
               <li>
-                <a href="#cookie" className="hover:text-[#467FF7] transition-colors">
+                <button
+                  onClick={() => handleNav('cookie-policy')}
+                  className="hover:text-[#467FF7] transition-colors cursor-pointer text-left"
+                >
                   Cookie policy
-                </a>
+                </button>
               </li>
             </ul>
           </div>

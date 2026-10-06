@@ -32,13 +32,8 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
           {/* Logo & Brand matching original WordPress Elementor Pathway header */}
           <button
             onClick={() => handleNav('home')}
-            className="flex items-center space-x-3 text-left focus:outline-none group cursor-pointer"
+            className="flex items-center text-left focus:outline-none group cursor-pointer"
           >
-            <img
-              src="/images/cropped-Parrocchia-180x180.png"
-              alt="Parrocchia Coriano"
-              className="w-12 h-12 object-contain"
-            />
             <span className="font-sans font-semibold text-xl sm:text-2xl text-[#1C244B] tracking-tight group-hover:text-[#467FF7] transition-colors">
               Parrocchia Coriano
             </span>
