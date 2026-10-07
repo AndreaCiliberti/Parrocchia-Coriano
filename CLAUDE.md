@@ -14,9 +14,10 @@ npm run dev       # Vite dev server on http://localhost:3000 (binds 0.0.0.0)
 npm run build     # production build to dist/
 npm run preview   # serve the built dist/
 npm run lint      # type-check only (tsc --noEmit); there is no ESLint
+npm test          # node:test via tsx: api/**/*.test.ts, src/**/*.test.ts
 ```
 
-There is no test suite.
+Tests cover the server-side logic of the notices dashboard (`api/_lib/`) and the dashboard helpers (`src/admin/`). There are no UI tests.
 
 ## Architecture
 
@@ -26,6 +27,9 @@ There is no test suite.
 - **Images:** site photos are served from `public/images/` and referenced by absolute path (`/images/foo.jpg`). Many have WordPress-style size variants (`-300x200`, `-1024x682`) carried over from the original site.
 - **Styling:** brand tokens are defined in the `@theme` block of `src/index.css` (`primary #1C244B`, `text #324A6D`, `accent #467FF7`, etc.), alongside a `.btn-elementor` pill-button class that mimics the original Elementor site. Components often use raw hex values in Tailwind arbitrary classes (`text-[#324A6D]`); keep to the same palette. Fonts (Poppins, Inter) load from Google Fonts in `index.html`.
 - The `@/` import alias maps to the repo root (not `src/`).
+- **Avvisi (notices) are data, not code:** `src/data/avvisi.json` (type `Avviso`), rendered by `AvvisiPage` through `src/components/AvvisoCard.tsx`. They are edited in the reserved dashboard at `/admin` (`admin.html` + `src/admin/`, a separate Vite entry so Tiptap stays out of the public bundle). Do not hand-edit notices in JSX.
+- **Serverless API in `api/`** (Vercel Functions, Web `Request → Response` handlers, relative imports with `.js` extension): `login`, `logout`, `avvisi` (read), `pubblica` (publish). Shared logic lives in `api/_lib/` (underscore = not exposed as routes). Publishing writes through the `Archivio` interface: with `GITHUB_TOKEN` set it makes a single commit via the GitHub Git Data API (Vercel then redeploys); with it empty it writes `src/data/avvisi.json` and `public/images/avvisi/` on disk.
+- **Local dev runs the API too:** `dev/apiLocale.ts` is a Vite plugin that mounts the `api/` handlers in `npm run dev` and loads `.env.local`. Required variables are listed in `.env.example`. Note that publishing locally modifies tracked files.
 
 ## Architettura operativa a 3 livelli (DOE)
 
