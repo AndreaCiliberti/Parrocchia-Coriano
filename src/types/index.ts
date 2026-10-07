@@ -99,3 +99,29 @@ export interface StoriaContent {
     switchAria: string;
   };
 }
+
+export interface Avviso {
+  id: string;
+  titolo: string;
+  descrizioneBreve: string;
+  /** HTML ristretto: p, br, strong, a, ul, li */
+  testo: string;
+  /** Percorso sotto /images/ oppure null */
+  immagine: string | null;
+  bozza: boolean;
+}
+
+export interface FileAvvisi {
+  avvisi: Avviso[];
+}
+
+export interface NuovaImmagine {
+  nome: string;
+  dataUrl: string;
+}
+
+export interface RichiestaPubblica {
+  avvisi: Avviso[];
+  nuoveImmagini: NuovaImmagine[];
+  sha: string;
+}
