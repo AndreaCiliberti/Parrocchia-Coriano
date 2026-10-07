@@ -43,3 +43,32 @@ body {
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(70, 127, 247, 0.35);
 }
+
+/* Testo degli avvisi (HTML da dashboard: p, strong, a, ul, li) */
+.testo-avviso p + p,
+.testo-avviso p + ul,
+.testo-avviso ul + p {
+  margin-top: 0.75rem;
+}
+
+.testo-avviso strong {
+  font-weight: 700;
+  color: #1C244B;
+}
+
+.testo-avviso a {
+  color: #467FF7;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.testo-avviso ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.testo-avviso li + li {
+  margin-top: 0.25rem;
+}
