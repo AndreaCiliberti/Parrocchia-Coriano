@@ -6,7 +6,7 @@
       "descrizioneBreve": "Due firme che non costano nulla, ma cambiano tante cose",
       "testo": "<p>Dona il tuo 8×1000 alla Chiesa Cattolica e il 5×1000 all’ANSPI di Coriano.</p>",
       "immagine": "/images/WhatsApp-Image-2026-04-28-at-13.06.51.jpeg",
-      "bozza": false
+      "bozza": true
     },
     {
       "id": "festanonni",
@@ -14,6 +14,14 @@
       "descrizioneBreve": "",
       "testo": "<p>Vi aspettiamo tutti per una serata in compagnia ed allegria dedicata alle persone più importanti delle nostre famiglie 💖</p><p><strong>Prenotate entro il 24 giugno ai numeri:</strong></p><ul><li><p>Telefono: <a href=\"tel:0541657167\">0541 657167</a></p></li><li><p>Cellulare: <a href=\"tel:3389284013\">338 9284013</a></p></li></ul>",
       "immagine": "/images/Festa-dei-nonni-768x543.jpeg",
+      "bozza": false
+    },
+    {
+      "id": "ezblxsmkat",
+      "titolo": "Test",
+      "descrizioneBreve": "prova di nuovo avviso",
+      "testo": "<p>test copy ed elenco per nuovo avviso</p><ul><li><p>punto uno</p></li><li><p>punto 2</p></li></ul><p><a href=\"https://www.andreaciliberti.it\" target=\"_blank\" rel=\"noopener noreferrer\">link di prova</a></p><p></p>",
+      "immagine": null,
       "bozza": false
     },
     {
