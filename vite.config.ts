@@ -7,6 +7,14 @@ import { apiLocale } from './dev/apiLocale';
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss(), apiLocale()],
+    build: {
+      rolldownOptions: {
+        input: {
+          main: path.resolve(__dirname, 'index.html'),
+          admin: path.resolve(__dirname, 'admin.html'),
+        },
+      },
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
