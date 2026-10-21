@@ -6,14 +6,6 @@
       "descrizioneBreve": "Due firme che non costano nulla, ma cambiano tante cose",
       "testo": "<p>Dona il tuo 8×1000 alla Chiesa Cattolica e il 5×1000 all’ANSPI di Coriano.</p>",
       "immagine": "/images/WhatsApp-Image-2026-04-28-at-13.06.51.jpeg",
-      "bozza": true
-    },
-    {
-      "id": "festanonni",
-      "titolo": "FESTA DEI NONNI - DOMENICA 28 GIUGNO CORTILE SUORE",
-      "descrizioneBreve": "",
-      "testo": "<p>Vi aspettiamo tutti per una serata in compagnia ed allegria dedicata alle persone più importanti delle nostre famiglie 💖</p><p><strong>Prenotate entro il 24 giugno ai numeri:</strong></p><ul><li><p>Telefono: <a href=\"tel:0541657167\">0541 657167</a></p></li><li><p>Cellulare: <a href=\"tel:3389284013\">338 9284013</a></p></li></ul>",
-      "immagine": "/images/Festa-dei-nonni-768x543.jpeg",
       "bozza": false
     },
     {
@@ -22,7 +14,7 @@
       "descrizioneBreve": "IL PAPA A RIMINI",
       "testo": "<p>Il nostro aiuto è importante… dai bambini agli adulti! Lasciamoci coinvolgere tutti e partecipiamo attivamente alla visita del Papa.</p><ul><li><p><a href=\"https://docs.google.com/forms/d/e/1FAIpQLSf2e77euV3pO0aUuahlttjE4ZFI8mjjTrrIxsFLgrMVNbM99A/viewform\" target=\"_blank\" rel=\"noopener noreferrer\">Candidati come volontario</a></p></li><li><p><a href=\"https://www.diocesi.rimini.it\" target=\"_blank\" rel=\"noopener noreferrer\">Info utili Diocesi</a></p></li></ul>",
       "immagine": "/images/Diocesi-di-Rimini-e-Papa-768x1086.jpeg",
-      "bozza": false
+      "bozza": true
     },
     {
       "id": "confessioni",
