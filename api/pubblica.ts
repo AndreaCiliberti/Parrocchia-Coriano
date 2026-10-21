@@ -1,5 +1,6 @@
 import { ConflittoError } from './_lib/archivio.js';
 import { creaArchivio } from './_lib/archivioScelto.js';
+import { avviaDeploy } from './_lib/deployHook.js';
 import { json, leggiJson, nonAutorizzato } from './_lib/http.js';
 import { sanificaTesto } from './_lib/sanifica.js';
 import { richiestaAutenticata } from './_lib/sessione.js';
@@ -15,6 +16,7 @@ export async function POST(request: Request): Promise<Response> {
   try {
     const archivio = creaArchivio();
     const nuovoSha = await archivio.scrivi(avvisi, nuoveImmagini, sha);
+    if (archivio.modalita === 'github') await avviaDeploy();
     return json({ ok: true, modalita: archivio.modalita, avvisi, sha: nuovoSha });
   } catch (e) {
     if (e instanceof ConflittoError) return json({ errore: e.message }, 409);
