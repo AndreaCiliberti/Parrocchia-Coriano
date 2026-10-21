@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PageId } from '../types';
 
 interface HomePageProps {
@@ -6,17 +6,6 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
-  const [newsletterName, setNewsletterName] = useState('');
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [newsletterConsent, setNewsletterConsent] = useState(false);
-  const [newsletterSuccess, setNewsletterSuccess] = useState(false);
-
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!newsletterConsent) return;
-    setNewsletterSuccess(true);
-  };
-
   return (
     <div className="font-sans text-[#324A6D] bg-white">
       {/* 1. HERO SECTION */}
@@ -318,77 +307,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* 6. SECTION: NEWSLETTER */}
-      <section className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white">
-        <div className="max-w-3xl mx-auto text-center space-y-6">
-          <h3 className="font-sans font-bold text-3xl sm:text-4xl text-[#1C244B]">
-            Iscriviti alla Newsletter
-          </h3>
-          <p className="text-base text-[#324A6D] leading-relaxed">
-            Notizie e riflessioni, approfondimenti sulla vita della parrocchia, meditazioni e messaggi dal nostro parroco e dalle voci della nostra comunità.
-          </p>
-
-          {newsletterSuccess ? (
-            <div className="bg-green-50 border border-green-200 text-green-800 p-6 rounded-2xl text-sm font-medium">
-              Grazie per l'iscrizione! Riceverai i prossimi aggiornamenti della comunità parrocchiale.
-            </div>
-          ) : (
-            <form onSubmit={handleNewsletterSubmit} className="space-y-4 text-left pt-4">
-              <div>
-                <label className="block text-xs font-semibold text-[#1C244B] uppercase mb-1">
-                  Nome*
-                </label>
-                <input
-                  type="text"
-                  required
-                  value={newsletterName}
-                  onChange={(e) => setNewsletterName(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#467FF7] text-sm"
-                  placeholder="Il tuo nome"
-                />
-              </div>
-
-              <div>
-                <label className="block text-xs font-semibold text-[#1C244B] uppercase mb-1">
-                  Email*
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:border-[#467FF7] text-sm"
-                  placeholder="nome@email.it"
-                />
-              </div>
-
-              <div className="flex items-start space-x-3 pt-1">
-                <input
-                  type="checkbox"
-                  id="consent"
-                  required
-                  checked={newsletterConsent}
-                  onChange={(e) => setNewsletterConsent(e.target.checked)}
-                  className="mt-1 h-4 w-4 text-[#467FF7] rounded border-gray-300 focus:ring-[#467FF7]"
-                />
-                <label htmlFor="consent" className="text-xs text-[#324A6D] leading-normal cursor-pointer">
-                  Si, desidero ricevere la Newsletter parrocchiale e confermo di accettare il trattamento dei propri dati personali come descritto nella Privacy Policy*
-                </label>
-              </div>
-
-              <div className="text-center pt-4">
-                <button
-                  type="submit"
-                  className="btn-elementor cursor-pointer"
-                >
-                  Invia
-                </button>
-              </div>
-            </form>
-          )}
         </div>
       </section>
     </div>
