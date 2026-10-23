@@ -69,6 +69,7 @@ export const WEEKLY_SCHEDULE: DaySchedule[] = [
     slots: [
       { time: 'Ore 7.30 – 9.30', activity: 'Lodi e adorazione Eucaristica presso la Chiesa parrocchiale' },
       { time: 'Ore 9.30 – 12.00', activity: 'Servizio Segreteria in Sede parrocchiale' },
+      { time: 'Ore 15.30 – 17.00', activity: 'Aiuto compiti bambini scuole elementari e medie presso la Sede Parrocchiale' },
       { time: 'Ore 18.30', activity: 'Messa in Chiesa Parrocchiale' },
     ],
   },
