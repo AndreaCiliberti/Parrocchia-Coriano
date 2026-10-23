@@ -112,10 +112,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1: Orari settimanali */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg motion-safe:hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center group focus-within:ring-2 focus-within:ring-[#2358CD] focus-within:ring-offset-2">
-              <div className="w-40 h-40 mb-6 overflow-hidden rounded-2xl">
+            <div className="relative bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-lg motion-safe:hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center group focus-within:ring-2 focus-within:ring-[#2358CD] focus-within:ring-offset-2">
+              <div className="w-32 h-32 mb-5 overflow-hidden rounded-2xl">
                 <img
                   loading="lazy"
                   src="/images/calice-square.png"
@@ -123,7 +123,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   className="w-full h-full object-contain motion-safe:group-hover:scale-105 transition-transform"
                 />
               </div>
-              <h3 className="font-sans font-bold text-2xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
+              <h3 className="font-sans font-bold text-xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
                 {/* The ::after overlay makes the whole card clickable */}
                 <button
                   type="button"
@@ -139,8 +139,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
 
             {/* Card 2: Gruppi */}
-            <div className="relative bg-white rounded-3xl p-8 border border-gray-100 shadow-sm hover:shadow-lg motion-safe:hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center group focus-within:ring-2 focus-within:ring-[#2358CD] focus-within:ring-offset-2">
-              <div className="w-40 h-40 mb-6 overflow-hidden rounded-2xl">
+            <div className="relative bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-lg motion-safe:hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center group focus-within:ring-2 focus-within:ring-[#2358CD] focus-within:ring-offset-2">
+              <div className="w-32 h-32 mb-5 overflow-hidden rounded-2xl">
                 <img
                   loading="lazy"
                   src="/images/giovani-600x600-1.png"
@@ -148,7 +148,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                   className="w-full h-full object-contain motion-safe:group-hover:scale-105 transition-transform"
                 />
               </div>
-              <h3 className="font-sans font-bold text-2xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
+              <h3 className="font-sans font-bold text-xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
                 {/* The ::after overlay makes the whole card clickable */}
                 <button
                   type="button"
@@ -160,6 +160,30 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </h3>
               <p className="text-sm text-[#324A6D] leading-relaxed">
                 Dal catechismo alla Caritas: i gruppi della parrocchia e come partecipare.
+              </p>
+            </div>
+
+            {/* Card 3: Storia */}
+            <div className="relative bg-white rounded-3xl p-6 border border-gray-100 shadow-sm hover:shadow-lg motion-safe:hover:-translate-y-1 transition-all duration-300 text-center flex flex-col items-center group focus-within:ring-2 focus-within:ring-[#2358CD] focus-within:ring-offset-2">
+              <div className="w-32 h-32 mb-5 overflow-hidden rounded-2xl">
+                <img
+                  loading="lazy"
+                  src="/images/storia/chiesa-seicentesca-1941.jpg"
+                  alt=""
+                  className="w-full h-full object-cover motion-safe:group-hover:scale-105 transition-transform"
+                />
+              </div>
+              <h3 className="font-sans font-bold text-xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
+                <button
+                  type="button"
+                  onClick={() => onNavigate('storia')}
+                  className="cursor-pointer focus:outline-none after:absolute after:inset-0 after:rounded-3xl"
+                >
+                  Storia
+                </button>
+              </h3>
+              <p className="text-sm text-[#324A6D] leading-relaxed">
+                Mille anni di storia della chiesa di Coriano, dalla prima cappella alla ricostruzione del dopoguerra.
               </p>
             </div>
           </div>
