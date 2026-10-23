@@ -1,3 +1,21 @@
 {
-  "rewrites": [{ "source": "/admin", "destination": "/admin.html" }]
+  "rewrites": [{ "source": "/admin", "destination": "/admin.html" }],
+  "redirects": [
+    {
+      "source": "/:page(orari-messe|avvisi|immagini-da-una-comunita|vita-comunita|comunita-parrocchiale|contatti|privacy|cookie-policy)",
+      "destination": "/#:page",
+      "permanent": false
+    },
+    {
+      "source": "/:page(orari-messe|avvisi|immagini-da-una-comunita|vita-comunita|comunita-parrocchiale|contatti|privacy|cookie-policy)/",
+      "destination": "/#:page",
+      "permanent": false
+    },
+    { "source": "/notiziario-parrocchiale/:path*", "destination": "/#avvisi", "permanent": true },
+    { "source": "/calendario/:path*", "destination": "/#avvisi", "permanent": true },
+    { "source": "/category/:path*", "destination": "/", "permanent": true },
+    { "source": "/tag/:path*", "destination": "/", "permanent": true },
+    { "source": "/author/:path*", "destination": "/", "permanent": true },
+    { "source": "/:post(test|prova)/:path*", "destination": "/", "permanent": true }
+  ]
 }
