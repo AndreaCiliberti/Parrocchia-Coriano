@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 import { PageId, StoriaBlock, StoriaContent, StoriaImage, StoriaLang, StoriaSection } from '../types';
+import { PageLink } from '../components/PageLink';
 import { STORIA_IT } from '../data/storiaContent';
 import { STORIA_EN } from '../data/storiaContent.en';
 import { scrollBehavior } from '../utils/motion';
@@ -227,12 +228,12 @@ export const StoriaPage: React.FC<StoriaPageProps> = ({ onNavigate }) => {
           <h3 className="font-sans font-bold text-2xl text-[#1C244B]">{ui.outroTitle}</h3>
           <p className="text-sm sm:text-base text-[#1C244B] max-w-2xl mx-auto">{ui.outroText}</p>
           <div className="pt-2 flex flex-wrap justify-center gap-3">
-            <button onClick={() => onNavigate('orari-messe')} className="btn-elementor cursor-pointer">
+            <PageLink page="orari-messe" onNavigate={onNavigate} className="btn-elementor cursor-pointer">
               {ui.massTimes}
-            </button>
-            <button onClick={() => onNavigate('contatti')} className="btn-elementor cursor-pointer">
+            </PageLink>
+            <PageLink page="contatti" onNavigate={onNavigate} className="btn-elementor cursor-pointer">
               {ui.contacts}
-            </button>
+            </PageLink>
           </div>
         </div>
       </section>

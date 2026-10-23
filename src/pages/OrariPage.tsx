@@ -1,5 +1,6 @@
 import React from 'react';
 import { MassSlot, PageId } from '../types';
+import { PageLink } from '../components/PageLink';
 import { CORIANO_MASSES, ZONE_CHURCHES } from '../data/siteData';
 
 interface OrariPageProps {
@@ -39,12 +40,13 @@ export const OrariPage: React.FC<OrariPageProps> = ({ onNavigate }) => {
           </h1>
           <p className="text-base sm:text-lg leading-relaxed max-w-2xl">
             Per feste e ricorrenze gli orari possono cambiare: controlla gli{' '}
-            <button
-              onClick={() => onNavigate('avvisi')}
+            <PageLink
+              page="avvisi"
+              onNavigate={onNavigate}
               className="text-[#2358CD] font-semibold underline hover:text-[#184CBF] cursor-pointer"
             >
               Avvisi
-            </button>
+            </PageLink>
             .
           </p>
         </header>
@@ -79,12 +81,13 @@ export const OrariPage: React.FC<OrariPageProps> = ({ onNavigate }) => {
               </dd>
             </div>
           </dl>
-          <button
-            onClick={() => onNavigate('vita-comunita')}
-            className="mt-8 text-sm sm:text-base font-semibold underline underline-offset-4 hover:text-[#B4D4DC] cursor-pointer"
+          <PageLink
+            page="vita-comunita"
+            onNavigate={onNavigate}
+            className="inline-block mt-8 text-sm sm:text-base font-semibold underline underline-offset-4 hover:text-[#B4D4DC] cursor-pointer"
           >
             Adorazione, confessioni e gli altri orari della settimana
-          </button>
+          </PageLink>
         </section>
 
         <section aria-labelledby="messe-zona" className="mt-16">

@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageId } from '../types';
+import { PageLink } from './PageLink';
 import { SITE_INFO } from '../data/siteData';
 import { scrollBehavior } from '../utils/motion';
 
@@ -25,60 +26,67 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h3>
             <ul className="space-y-2 text-[#324A6D]">
               <li>
-                <button 
-                  onClick={() => handleNav('orari-messe')} 
+                <PageLink 
+                  page="orari-messe" 
+                  onNavigate={handleNav} 
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Orari Messe
-                </button>
+                </PageLink>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNav('avvisi')} 
+                <PageLink 
+                  page="avvisi" 
+                  onNavigate={handleNav} 
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Avvisi
-                </button>
+                </PageLink>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNav('vita-comunita')} 
+                <PageLink 
+                  page="vita-comunita" 
+                  onNavigate={handleNav} 
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Orari settimanali
-                </button>
+                </PageLink>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNav('comunita-parrocchiale')} 
+                <PageLink 
+                  page="comunita-parrocchiale" 
+                  onNavigate={handleNav} 
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Gruppi
-                </button>
+                </PageLink>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNav('immagini-da-una-comunita')} 
+                <PageLink 
+                  page="immagini-da-una-comunita" 
+                  onNavigate={handleNav} 
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Foto
-                </button>
+                </PageLink>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNav('storia')} 
+                <PageLink 
+                  page="storia" 
+                  onNavigate={handleNav} 
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Storia
-                </button>
+                </PageLink>
               </li>
               <li>
-                <button 
-                  onClick={() => handleNav('contatti')} 
+                <PageLink 
+                  page="contatti" 
+                  onNavigate={handleNav} 
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Contatti
-                </button>
+                </PageLink>
               </li>
             </ul>
           </div>
@@ -90,20 +98,22 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </h3>
             <ul className="space-y-2 text-[#324A6D]">
               <li>
-                <button
-                  onClick={() => handleNav('privacy')}
+                <PageLink
+                  page="privacy"
+                  onNavigate={handleNav}
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Informativa privacy
-                </button>
+                </PageLink>
               </li>
               <li>
-                <button
-                  onClick={() => handleNav('cookie-policy')}
+                <PageLink
+                  page="cookie-policy"
+                  onNavigate={handleNav}
                   className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
                 >
                   Cookie policy
-                </button>
+                </PageLink>
               </li>
             </ul>
           </div>

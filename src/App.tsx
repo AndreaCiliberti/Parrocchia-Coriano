@@ -3,7 +3,7 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { PageId } from './types';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
@@ -18,39 +18,37 @@ import { ContattiPage } from './pages/ContattiPage';
 import { LegalPage } from './pages/LegalPage';
 import { PRIVACY_POLICY_HTML, COOKIE_POLICY_HTML } from './data/legalContent';
 import { scrollBehavior } from './utils/motion';
+import { pageFromHash, pageFromPath, pathFor } from './routes';
+import { updateHead } from './seo';
+import { NotFoundPage } from './pages/NotFoundPage';
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState<PageId>('home');
+interface AppProps {
+  /** The page to render first; null renders the 404 page. */
+  initialPage: PageId | null;
+}
 
-  // Handle URL hash navigation for exact page matching
+export default function App({ initialPage }: AppProps) {
+  const [currentPage, setCurrentPage] = useState<PageId | null>(initialPage);
+
+  // Back/forward buttons, and old hash links (/#avvisi) rewritten to real paths
   useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#/', '').replace('#', '').toLowerCase();
-      const validPages: PageId[] = [
-        'home',
-        'orari-messe',
-        'avvisi',
-        'immagini-da-una-comunita',
-        'vita-comunita',
-        'comunita-parrocchiale',
-        'storia',
-        'contatti',
-        'privacy',
-        'cookie-policy',
-      ];
-      if (validPages.includes(hash as PageId)) {
-        setCurrentPage(hash as PageId);
-      }
-    };
-
-    handleHashChange();
-    window.addEventListener('hashchange', handleHashChange);
-    return () => window.removeEventListener('hashchange', handleHashChange);
+    const fromHash = pageFromHash(window.location.hash);
+    if (fromHash) {
+      window.history.replaceState(null, '', pathFor(fromHash));
+      setCurrentPage(fromHash);
+    }
+    const handlePopState = () => setCurrentPage(pageFromPath(window.location.pathname));
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
   }, []);
 
+  useEffect(() => {
+    updateHead(currentPage);
+  }, [currentPage]);
+
   const handleNavigate = (page: PageId) => {
+    if (page !== currentPage) window.history.pushState(null, '', pathFor(page));
     setCurrentPage(page);
-    window.location.hash = page === 'home' ? '' : page;
     window.scrollTo({ top: 0, behavior: scrollBehavior() });
   };
 
@@ -90,6 +88,9 @@ export default function App() {
         )}
         {currentPage === 'cookie-policy' && (
           <LegalPage title="Cookie policy" html={COOKIE_POLICY_HTML} />
+        )}
+        {currentPage === null && (
+          <NotFoundPage onNavigate={handleNavigate} />
         )}
       </main>
 

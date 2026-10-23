@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { PageId } from '../types';
+import { PageLink } from './PageLink';
 import { Menu, X } from 'lucide-react';
 import { scrollBehavior } from '../utils/motion';
 
 interface NavbarProps {
-  currentPage: PageId;
+  currentPage: PageId | null;
   onNavigate: (page: PageId) => void;
 }
 
@@ -32,23 +33,25 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo & Brand matching original WordPress Elementor Pathway header */}
-          <button
-            onClick={() => handleNav('home')}
+          <PageLink
+            page="home"
+            onNavigate={handleNav}
             className="flex items-center text-left rounded-md group cursor-pointer focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2358CD]"
           >
             <span className="font-sans font-semibold text-xl sm:text-2xl text-[#1C244B] tracking-tight group-hover:text-[#2358CD] transition-colors">
               Parrocchia Coriano
             </span>
-          </button>
+          </PageLink>
 
           {/* Desktop Navigation Menu */}
           <nav aria-label="Menu principale" className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {menuItems.map((item) => {
               const isActive = currentPage === item.id;
               return (
-                <button
+                <PageLink
                   key={item.id}
-                  onClick={() => handleNav(item.id)}
+                  page={item.id}
+                  onNavigate={handleNav}
                   aria-current={isActive ? 'page' : undefined}
                   className={`px-3 py-2 text-sm font-medium transition-colors cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2358CD] ${
                     isActive
@@ -57,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
                   }`}
                 >
                   {item.label}
-                </button>
+                </PageLink>
               );
             })}
           </nav>
@@ -81,32 +84,34 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate }) => {
       {mobileMenuOpen && (
         <nav id="menu-mobile" aria-label="Menu" className="lg:hidden border-t border-gray-100 bg-white shadow-lg">
           <div className="px-4 py-3 space-y-1">
-            <button
-              onClick={() => handleNav('home')}
+            <PageLink
+              page="home"
+              onNavigate={handleNav}
               aria-current={currentPage === 'home' ? 'page' : undefined}
-              className={`w-full text-left px-3 py-3 rounded-lg text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2358CD] ${
+              className={`block w-full text-left px-3 py-3 rounded-lg text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2358CD] ${
                 currentPage === 'home'
                   ? 'bg-blue-50 text-[#2358CD] font-semibold'
                   : 'text-[#324A6D] hover:bg-gray-50'
               }`}
             >
               Home
-            </button>
+            </PageLink>
             {menuItems.map((item) => {
               const isActive = currentPage === item.id;
               return (
-                <button
+                <PageLink
                   key={item.id}
-                  onClick={() => handleNav(item.id)}
+                  page={item.id}
+                  onNavigate={handleNav}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`w-full text-left px-3 py-3 rounded-lg text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2358CD] ${
+                  className={`block w-full text-left px-3 py-3 rounded-lg text-base font-medium focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#2358CD] ${
                     isActive
                       ? 'bg-blue-50 text-[#2358CD] font-semibold'
                       : 'text-[#324A6D] hover:bg-gray-50'
                   }`}
                 >
                   {item.label}
-                </button>
+                </PageLink>
               );
             })}
           </div>

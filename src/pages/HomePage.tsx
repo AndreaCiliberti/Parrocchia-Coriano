@@ -1,5 +1,6 @@
 import React from 'react';
 import { PageId, type FileAvvisi } from '../types';
+import { PageLink } from '../components/PageLink';
 import { CAMPO_LAVORO_PHOTOS, CORIANO_MASSES } from '../data/siteData';
 import datiAvvisi from '../data/avvisi.json';
 import { estratto, soloPubblicati } from '../data/avvisiPubblici';
@@ -51,12 +52,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </dl>
             </div>
             <div>
-              <button
-                onClick={() => onNavigate('orari-messe')}
+              <PageLink
+                page="orari-messe"
+                onNavigate={onNavigate}
                 className="btn-elementor cursor-pointer"
               >
                 Orari di tutta la zona
-              </button>
+              </PageLink>
             </div>
           </div>
 
@@ -94,12 +96,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           ) : (
             <p className="mt-6 text-lg text-[#F4F6FB]/85">Al momento non ci sono avvisi.</p>
           )}
-          <button
-            onClick={() => onNavigate('avvisi')}
+          <PageLink
+            page="avvisi"
+            onNavigate={onNavigate}
             className="btn-elementor btn-chiaro cursor-pointer mt-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F4F6FB]"
           >
             {ultimiAvvisi.length > 0 ? 'Leggi tutti gli avvisi' : 'Vai agli avvisi'}
-          </button>
+          </PageLink>
         </div>
       </section>
 
@@ -127,12 +130,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </li>
             ))}
           </ul>
-          <button
-            onClick={() => onNavigate('immagini-da-una-comunita')}
+          <PageLink
+            page="immagini-da-una-comunita"
+            onNavigate={onNavigate}
             className="btn-elementor cursor-pointer mt-8"
           >
             Guarda tutte le foto
-          </button>
+          </PageLink>
         </div>
       </section>
 
@@ -161,13 +165,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="font-sans font-bold text-xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
                 {/* The ::after overlay makes the whole card clickable */}
-                <button
-                  type="button"
-                  onClick={() => onNavigate('vita-comunita')}
+                <PageLink
+                  page="vita-comunita"
+                  onNavigate={onNavigate}
                   className="cursor-pointer focus:outline-none after:absolute after:inset-0 after:rounded-3xl"
                 >
                   Orari settimanali
-                </button>
+                </PageLink>
               </h3>
               <p className="text-sm text-[#324A6D] leading-relaxed">
                 Adorazione, confessioni, doposcuola e incontri, giorno per giorno.
@@ -186,13 +190,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               </div>
               <h3 className="font-sans font-bold text-xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
                 {/* The ::after overlay makes the whole card clickable */}
-                <button
-                  type="button"
-                  onClick={() => onNavigate('comunita-parrocchiale')}
+                <PageLink
+                  page="comunita-parrocchiale"
+                  onNavigate={onNavigate}
                   className="cursor-pointer focus:outline-none after:absolute after:inset-0 after:rounded-3xl"
                 >
                   Gruppi
-                </button>
+                </PageLink>
               </h3>
               <p className="text-sm text-[#324A6D] leading-relaxed">
                 Dal catechismo alla Caritas: i gruppi della parrocchia e come partecipare.
@@ -210,13 +214,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 />
               </div>
               <h3 className="font-sans font-bold text-xl text-[#1C244B] group-hover:text-[#2358CD] transition-colors mb-3">
-                <button
-                  type="button"
-                  onClick={() => onNavigate('storia')}
+                <PageLink
+                  page="storia"
+                  onNavigate={onNavigate}
                   className="cursor-pointer focus:outline-none after:absolute after:inset-0 after:rounded-3xl"
                 >
                   Storia
-                </button>
+                </PageLink>
               </h3>
               <p className="text-sm text-[#324A6D] leading-relaxed">
                 Mille anni di storia della chiesa di Coriano, dalla prima cappella alla ricostruzione del dopoguerra.

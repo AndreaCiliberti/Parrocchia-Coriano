@@ -11,7 +11,7 @@ Website for the Parrocchia S. Maria Assunta di Coriano (RN): Mass times, notices
 ```bash
 npm install
 npm run dev       # Vite dev server on http://localhost:3000 (binds 0.0.0.0)
-npm run build     # production build to dist/
+npm run build     # production build to dist/, then prerender of every page
 npm run preview   # serve the built dist/
 npm run lint      # type-check only (tsc --noEmit); there is no ESLint
 npm test          # node:test via tsx: api/**/*.test.ts, src/**/*.test.ts
@@ -22,7 +22,8 @@ Tests cover the server-side logic of the notices dashboard (`api/_lib/`) and the
 ## Architecture
 
 - **Stack:** React 19 + TypeScript, Vite, Tailwind CSS v4 (via `@tailwindcss/vite`, no `tailwind.config`), `lucide-react` icons.
-- **Routing is hand-rolled, not a router library.** `src/App.tsx` holds `currentPage: PageId` in state and syncs it with `window.location.hash` (e.g. `#avvisi`). Every page and the `Navbar`/`Footer` receive an `onNavigate(page)` prop. Adding a page requires: a new member of the `PageId` union in `src/types/index.ts`, an entry in the `validPages` list and a render branch in `App.tsx`, and a link in `Navbar`/`Footer`.
+- **Routing is hand-rolled, not a router library.** Each page has a real path (`/orari-messe`, `/avvisi`, ...). `src/routes.ts` maps `PageId` ↔ path and holds each page's title and description; `src/App.tsx` keeps `currentPage: PageId | null` (null = 404) in state and syncs it with the History API. Old hash links (`/#avvisi`) are rewritten to the path on load. Every page and the `Navbar`/`Footer` receive an `onNavigate(page)` prop; links between pages use `src/components/PageLink.tsx` (a real `<a href>` that navigates in-app), never `<button>`. Adding a page requires: a new member of the `PageId` union in `src/types/index.ts`, an entry in `PAGES` in `src/routes.ts`, a render branch in `App.tsx`, and a link in `Navbar`/`Footer`.
+- **SEO / prerender:** `npm run build` runs `vite build` then `scripts/prerender.tsx`, which renders every page with `renderToString` into `dist/<page>.html` (plus `404.html` and `sitemap.xml`), with the `<head>` from `src/seo.ts` (title, description, canonical, Open Graph, JSON-LD `Church` on the home). `src/main.tsx` hydrates when the root is prerendered. So page components must render the same on server and client: no `window`/`document` during render, only in effects and handlers. `vercel.json` uses `cleanUrls` + `trailingSlash: false` and redirects the old WordPress slugs (`/calendario/*`, `/category/*`, ...). `public/robots.txt` points to the sitemap.
 - **Content lives in `src/data/siteData.ts`** (site info, prefestive/festive Mass lists, weekly schedule, community groups, photo lists), typed by interfaces in `src/types/index.ts`. Update content there rather than hardcoding it in page components.
 - **Images:** site photos are served from `public/images/` and referenced by absolute path (`/images/foo.jpg`). Many have WordPress-style size variants (`-300x200`, `-1024x682`) carried over from the original site.
 - **Styling:** brand tokens are defined in the `@theme` block of `src/index.css` (`primary #1C244B`, `text #324A6D`, `accent #2358CD`, etc.), alongside a `.btn-elementor` pill-button class that mimics the original Elementor site. Components often use raw hex values in Tailwind arbitrary classes (`text-[#324A6D]`); keep to the same palette. Fonts (Poppins, Inter) load from Google Fonts in `index.html`.
@@ -67,7 +68,7 @@ Queste cartelle (e `context/info-azienda.md`, da leggere sempre prima di operare
 
 ## Notes
 
-- Deployment: code on GitHub, hosted on Vercel (not WordPress/SiteGround like the old site). Live at `https://www.parrocchiacoriano.com` (the bare domain 308-redirects to www; DNS on Namecheap BasicDNS); `parrocchia-coriano.vercel.app` still works. `vercel.json` redirects the old WordPress slugs (`/orari-messe/`, `/calendario/*`, `/category/*`, ...) to the hash routes; the page-slug redirects are temporary (307) so they can be dropped if routing moves to real paths. The privacy and cookie texts in `src/data/legalContent.ts` (pages `#privacy`, `#cookie-policy`, rendered by `src/pages/LegalPage.tsx`) must stay consistent with the third-party services the site actually uses.
+- Deployment: code on GitHub, hosted on Vercel (not WordPress/SiteGround like the old site). Live at `https://www.parrocchiacoriano.com` (the bare domain 308-redirects to www; DNS on Namecheap BasicDNS); `parrocchia-coriano.vercel.app` still works. The privacy and cookie texts in `src/data/legalContent.ts` (pages `#privacy`, `#cookie-policy`, rendered by `src/pages/LegalPage.tsx`) must stay consistent with the third-party services the site actually uses.
 
 - `vite.config.ts` disables HMR/file watching when `DISABLE_HMR=true` (AI Studio behaviour); leave that block as is.
 - `@google/genai`, `express`, `dotenv` and `GEMINI_API_KEY` are template leftovers: nothing in `src/` uses them yet.
