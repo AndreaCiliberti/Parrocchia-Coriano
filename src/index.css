@@ -6,8 +6,8 @@
   --color-primary: #1C244B;
   --color-secondary: #F3F5F8;
   --color-text: #324A6D;
-  --color-accent: #467FF7;
-  --color-accent-hover: #336de6;
+  --color-accent: #2358CD;
+  --color-accent-hover: #184CBF;
   --color-ice: #CDE4E7;
   --color-sky: #B4D4DC;
   --color-soft: #F9FAFD;
@@ -15,6 +15,20 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 body {
@@ -25,7 +39,7 @@ body {
 
 /* Authentic Elementor pill-shaped button style */
 .btn-elementor {
-  background-color: #467FF7;
+  background-color: #2358CD;
   color: #ffffff;
   border-radius: 9999px;
   padding: 12px 35px;
@@ -35,13 +49,13 @@ body {
   align-items: center;
   justify-content: center;
   transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(70, 127, 247, 0.25);
+  box-shadow: 0 4px 14px rgba(35, 88, 205, 0.25);
 }
 
 .btn-elementor:hover {
-  background-color: #336de6;
+  background-color: #184CBF;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(70, 127, 247, 0.35);
+  box-shadow: 0 6px 18px rgba(35, 88, 205, 0.35);
 }
 
 /* Testo degli avvisi (HTML da dashboard: p, strong, a, ul, li) */
@@ -57,7 +71,7 @@ body {
 }
 
 .testo-avviso a {
-  color: #467FF7;
+  color: #2358CD;
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;

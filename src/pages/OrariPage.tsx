@@ -1,96 +1,124 @@
 import React from 'react';
-import { PageId } from '../types';
-import { PREFESTIVE_MASSES, FESTIVE_MASSES, SITE_INFO } from '../data/siteData';
+import { MassSlot, PageId } from '../types';
+import { CORIANO_MASSES, ZONE_CHURCHES } from '../data/siteData';
 
 interface OrariPageProps {
   onNavigate: (page: PageId) => void;
 }
 
+const MassSlots: React.FC<{ slots: MassSlot[] }> = ({ slots }) => {
+  if (slots.length === 0) {
+    return (
+      <>
+        <span aria-hidden="true" className="text-[#324A6D]/50">–</span>
+        <span className="sr-only">nessuna Messa</span>
+      </>
+    );
+  }
+  return (
+    <ul className="space-y-1">
+      {slots.map((slot) => (
+        <li key={slot.time + (slot.note ?? '')}>
+          <span className="font-semibold text-[#1C244B] tabular-nums">{slot.time}</span>
+          {slot.note && (
+            <span className="block text-xs sm:text-sm text-[#324A6D]/80">{slot.note}</span>
+          )}
+        </li>
+      ))}
+    </ul>
+  );
+};
+
 export const OrariPage: React.FC<OrariPageProps> = ({ onNavigate }) => {
   return (
     <div className="font-sans text-[#324A6D] bg-white py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto space-y-12">
-        {/* Header with authentic icon and title */}
-        <div className="text-center space-y-4">
+      <div className="max-w-3xl mx-auto">
+        <header className="space-y-3">
           <h1 className="font-sans font-bold text-3xl sm:text-5xl text-[#1C244B]">
-            Orari Messe Zona Pastorale
+            Orari delle Messe
           </h1>
-          <p className="text-base sm:text-lg text-[#324A6D] max-w-2xl mx-auto leading-relaxed">
-            In caso di eventi o festività particolari gli orari possono cambiare. Consulta la sezione{' '}
+          <p className="text-base sm:text-lg leading-relaxed max-w-2xl">
+            Per feste e ricorrenze gli orari possono cambiare: controlla gli{' '}
             <button
               onClick={() => onNavigate('avvisi')}
-              className="text-[#467FF7] font-semibold underline hover:text-[#336de6] cursor-pointer"
+              className="text-[#2358CD] font-semibold underline hover:text-[#184CBF] cursor-pointer"
             >
               Avvisi
-            </button>{' '}
-            per sapere se ci sono cambiamenti in alcuni giorni particolare.
-          </p>
-        </div>
-
-        {/* Section 1: Messe Prefestive */}
-        <div className="bg-[#F9FAFD] rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-6">
-          <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#1C244B] border-b border-gray-200 pb-4">
-            Messe Prefestive
-          </h2>
-          <ul className="divide-y divide-gray-200/70 text-sm sm:text-base">
-            {PREFESTIVE_MASSES.map((item, idx) => (
-              <li key={idx} className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                <span className="font-medium text-[#1C244B] uppercase tracking-wide">
-                  {item.churchName}
-                </span>
-                <span className="font-bold text-[#467FF7] text-base sm:text-lg">
-                  {item.time}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Section 2: Messe Festive */}
-        <div className="bg-[#F9FAFD] rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-6">
-          <h2 className="font-sans font-bold text-2xl sm:text-3xl text-[#1C244B] border-b border-gray-200 pb-4">
-            Messe Festive
-          </h2>
-          <ul className="divide-y divide-gray-200/70 text-sm sm:text-base">
-            {FESTIVE_MASSES.map((item, idx) => (
-              <li key={idx} className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-1">
-                <span className="font-medium text-[#1C244B] uppercase tracking-wide">
-                  {item.churchName}
-                </span>
-                <span className="font-bold text-[#467FF7] text-base sm:text-lg">
-                  {item.time}
-                </span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Bottom Contatti Box */}
-        <div className="bg-[#B4D4DC]/50 rounded-3xl p-6 sm:p-8 border border-[#a2c9d2]/60 text-center space-y-4">
-          <h3 className="font-sans font-bold text-2xl text-[#1C244B]">
-            Contatti
-          </h3>
-          <div className="text-sm sm:text-base text-[#1C244B] space-y-1">
-            <p className="font-semibold">{SITE_INFO.address}</p>
-            <p>
-              Mail: <a href={`mailto:${SITE_INFO.email}`} className="text-[#467FF7] underline">{SITE_INFO.email}</a>
-            </p>
-            <p>
-              Telefono: <a href={`tel:${SITE_INFO.phone}`} className="text-[#467FF7] underline">{SITE_INFO.phone}</a>
-            </p>
-            <p className="text-xs text-[#324A6D] pt-1">
-              Orari Segreteria: {SITE_INFO.secretaryHours}
-            </p>
-          </div>
-          <div className="pt-2">
-            <button
-              onClick={() => onNavigate('contatti')}
-              className="btn-elementor cursor-pointer"
-            >
-              Contattaci
             </button>
-          </div>
-        </div>
+            .
+          </p>
+        </header>
+
+        {/* Coriano first: it is what most visitors are looking for */}
+        <section
+          aria-labelledby="messe-coriano"
+          className="mt-10 rounded-3xl bg-[#1C244B] text-[#F4F6FB] p-6 sm:p-10"
+        >
+          <h2 id="messe-coriano" className="font-sans font-bold text-2xl sm:text-3xl">
+            Coriano
+            <span className="block text-base sm:text-lg font-normal text-[#F4F6FB]/75 mt-1">
+              Chiesa di {CORIANO_MASSES.church}
+            </span>
+          </h2>
+          <dl className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-6">
+            <div>
+              <dt className="text-sm uppercase tracking-wider text-[#F4F6FB]/75">Sabato</dt>
+              <dd className="text-3xl sm:text-4xl font-bold tabular-nums mt-1">{CORIANO_MASSES.saturday}</dd>
+            </div>
+            <div>
+              <dt className="text-sm uppercase tracking-wider text-[#F4F6FB]/75">Domenica</dt>
+              <dd className="text-3xl sm:text-4xl font-bold tabular-nums mt-1">{CORIANO_MASSES.sunday}</dd>
+            </div>
+            <div className="col-span-2 sm:col-span-1">
+              <dt className="text-sm uppercase tracking-wider text-[#F4F6FB]/75">Lunedì – venerdì</dt>
+              <dd className="text-3xl sm:text-4xl font-bold tabular-nums mt-1">
+                {CORIANO_MASSES.weekdays}
+                <span className="block text-base font-normal text-[#F4F6FB]/75 mt-1">
+                  {CORIANO_MASSES.weekdaysNote}
+                </span>
+              </dd>
+            </div>
+          </dl>
+          <button
+            onClick={() => onNavigate('vita-comunita')}
+            className="mt-8 text-sm sm:text-base font-semibold underline underline-offset-4 hover:text-[#B4D4DC] cursor-pointer"
+          >
+            Adorazione, confessioni e gli altri orari della settimana
+          </button>
+        </section>
+
+        <section aria-labelledby="messe-zona" className="mt-16">
+          <h2 id="messe-zona" className="font-sans font-bold text-2xl sm:text-3xl text-[#1C244B]">
+            Le altre chiese della zona pastorale
+          </h2>
+          <table className="mt-6 w-full text-left text-sm sm:text-base">
+            <thead>
+              <tr className="border-b-2 border-[#1C244B]/15 text-xs sm:text-sm uppercase tracking-wider text-[#324A6D]/80">
+                <th scope="col" className="py-3 pr-3 font-semibold">Chiesa</th>
+                <th scope="col" className="py-3 px-3 font-semibold w-24 sm:w-36">Sabato</th>
+                <th scope="col" className="py-3 pl-3 font-semibold w-24 sm:w-36">Domenica</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-gray-200">
+              {ZONE_CHURCHES.map((item) => (
+                <tr key={item.place} className="align-top">
+                  <th scope="row" className="py-4 pr-3 font-normal">
+                    <span className="block font-semibold text-[#1C244B]">{item.place}</span>
+                    {item.church && (
+                      <span className="block text-xs sm:text-sm text-[#324A6D]/80">{item.church}</span>
+                    )}
+                  </th>
+                  <td className="py-4 px-3">
+                    <MassSlots slots={item.saturday} />
+                  </td>
+                  <td className="py-4 pl-3">
+                    <MassSlots slots={item.sunday} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
       </div>
     </div>
   );

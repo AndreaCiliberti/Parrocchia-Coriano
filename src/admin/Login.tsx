@@ -26,7 +26,7 @@ export const Login: React.FC<LoginProps> = ({ onEntrato, avviso }) => {
     }
   };
 
-  const campo = 'w-full rounded-xl border border-gray-200 px-4 py-2.5 focus:border-[#467FF7] focus:outline-none';
+  const campo = 'w-full rounded-xl border border-gray-200 px-4 py-2.5 focus:border-[#2358CD] focus:outline-none';
 
   return (
     <div className="min-h-screen flex items-center justify-center px-4">

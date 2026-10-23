@@ -17,6 +17,7 @@ import { StoriaPage } from './pages/StoriaPage';
 import { ContattiPage } from './pages/ContattiPage';
 import { LegalPage } from './pages/LegalPage';
 import { PRIVACY_POLICY_HTML, COOKIE_POLICY_HTML } from './data/legalContent';
+import { scrollBehavior } from './utils/motion';
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<PageId>('home');
@@ -50,11 +51,11 @@ export default function App() {
   const handleNavigate = (page: PageId) => {
     setCurrentPage(page);
     window.location.hash = page === 'home' ? '' : page;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: scrollBehavior() });
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans text-[#324A6D] antialiased selection:bg-[#467FF7]/20 selection:text-[#1C244B]">
+    <div className="min-h-screen flex flex-col bg-white font-sans text-[#324A6D] antialiased selection:bg-[#2358CD]/20 selection:text-[#1C244B]">
       {/* Real site navbar */}
       <Navbar currentPage={currentPage} onNavigate={handleNavigate} />
 
@@ -85,10 +86,10 @@ export default function App() {
           <ContattiPage onNavigate={handleNavigate} />
         )}
         {currentPage === 'privacy' && (
-          <LegalPage title="Informativa Privacy" html={PRIVACY_POLICY_HTML} />
+          <LegalPage title="Informativa privacy" html={PRIVACY_POLICY_HTML} />
         )}
         {currentPage === 'cookie-policy' && (
-          <LegalPage title="Cookie Policy" html={COOKIE_POLICY_HTML} />
+          <LegalPage title="Cookie policy" html={COOKIE_POLICY_HTML} />
         )}
       </main>
 

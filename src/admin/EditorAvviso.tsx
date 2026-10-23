@@ -16,7 +16,7 @@ interface EditorAvvisoProps {
   onElimina: () => void;
 }
 
-const campo = 'w-full rounded-xl border px-4 py-2.5 focus:border-[#467FF7] focus:outline-none';
+const campo = 'w-full rounded-xl border px-4 py-2.5 focus:border-[#2358CD] focus:outline-none';
 const bottoneIcona = 'p-2 rounded-lg text-[#1C244B] hover:bg-gray-100 disabled:opacity-30 disabled:hover:bg-transparent';
 
 export const EditorAvviso: React.FC<EditorAvvisoProps> = ({
@@ -90,7 +90,7 @@ export const EditorAvviso: React.FC<EditorAvvisoProps> = ({
           <div className="space-y-1.5">
             <span className="text-sm font-medium text-[#1C244B]">Immagine</span>
             <div className="flex flex-wrap items-center gap-2">
-              <label className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#467FF7] text-[#467FF7] text-sm font-medium cursor-pointer hover:bg-[#467FF7] hover:text-white transition-colors">
+              <label className="flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#2358CD] text-[#2358CD] text-sm font-medium cursor-pointer hover:bg-[#2358CD] hover:text-white transition-colors">
                 <ImagePlus size={16} />
                 {caricamento ? 'Elaborazione…' : srcAnteprima ? 'Sostituisci immagine' : 'Carica immagine'}
                 <input type="file" accept="image/*" className="sr-only" onChange={scegliImmagine} disabled={caricamento} />

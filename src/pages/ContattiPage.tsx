@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageId } from '../types';
 import { SITE_INFO } from '../data/siteData';
+import { MapPin } from 'lucide-react';
 
 interface ContattiPageProps {
   onNavigate: (page: PageId) => void;
@@ -11,12 +12,12 @@ export const ContattiPage: React.FC<ContattiPageProps> = ({ onNavigate }) => {
     <div className="font-sans text-[#324A6D] bg-white py-12 lg:py-20 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto space-y-16">
         {/* Title */}
-        <div className="text-center space-y-4 max-w-3xl mx-auto">
-          <h1 className="font-sans font-bold text-4xl sm:text-5xl text-[#1C244B]">
+        <div className="space-y-4 max-w-2xl">
+          <h1 className="font-sans font-bold text-3xl sm:text-5xl text-[#1C244B]">
             Contatti
           </h1>
           <p className="text-base sm:text-lg text-[#324A6D] leading-relaxed">
-            Siamo qui per ascoltarti e condividere il cammino della fede insieme a te. Per qualsiasi domanda, informazione o richiesta sui gruppi parrocchiali, non esitare a metterti in contatto con noi.
+            Per domande, informazioni o per avvicinarti a un gruppo, chiamaci o scrivici. La segreteria risponde dal lunedì al venerdì, dalle 9.30 alle 12.
           </p>
         </div>
 
@@ -31,17 +32,17 @@ export const ContattiPage: React.FC<ContattiPageProps> = ({ onNavigate }) => {
                 <strong>Indirizzo:</strong> {SITE_INFO.address}
               </p>
               <p>
-                <strong>Orari Segreteria:</strong> {SITE_INFO.secretaryHours}
+                <strong>Segreteria:</strong> {SITE_INFO.secretaryHours}
               </p>
               <p>
                 <strong>Telefono:</strong>{' '}
-                <a href={`tel:${SITE_INFO.phone}`} className="text-[#467FF7] font-semibold underline">
+                <a href={`tel:${SITE_INFO.phone}`} className="text-[#2358CD] font-semibold underline">
                   {SITE_INFO.phone}
                 </a>
               </p>
               <p>
                 <strong>Email:</strong>{' '}
-                <a href={`mailto:${SITE_INFO.email}`} className="text-[#467FF7] font-semibold underline">
+                <a href={`mailto:${SITE_INFO.email}`} className="text-[#2358CD] font-semibold underline">
                   {SITE_INFO.email}
                 </a>
               </p>
@@ -58,12 +59,14 @@ export const ContattiPage: React.FC<ContattiPageProps> = ({ onNavigate }) => {
               className="block group relative"
             >
               <img
+                loading="lazy"
                 src="/images/Screenshot-2025-03-12-alle-16.45.09-1024x902.png"
-                alt="Mappa Coriano"
+                alt=""
                 className="w-full h-auto object-cover group-hover:opacity-95 transition-opacity"
               />
-              <div className="p-4 bg-white text-xs font-semibold text-[#467FF7] text-center border-t border-gray-100 flex items-center justify-center space-x-1.5">
-                <span>📍 Apri la posizione su Google Maps</span>
+              <div className="p-4 bg-white text-sm font-semibold text-[#2358CD] text-center border-t border-gray-100 flex items-center justify-center gap-1.5">
+                <MapPin className="w-4 h-4" aria-hidden="true" />
+                <span>Apri la posizione su Google Maps</span>
               </div>
             </a>
           </div>

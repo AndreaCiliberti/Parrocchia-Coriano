@@ -10,11 +10,18 @@ export type PageId =
   | 'privacy'
   | 'cookie-policy';
 
-export interface MassTime {
-  churchName: string;
+/** One Mass time; `note` qualifies it when it changes during the year. */
+export interface MassSlot {
   time: string;
-  type: 'prefestiva' | 'festiva';
-  notes?: string;
+  note?: string;
+}
+
+/** A church of the pastoral zone with its Saturday (prefestive) and Sunday Masses. */
+export interface ChurchMasses {
+  place: string;
+  church?: string;
+  saturday: MassSlot[];
+  sunday: MassSlot[];
 }
 
 export interface NoticeItem {

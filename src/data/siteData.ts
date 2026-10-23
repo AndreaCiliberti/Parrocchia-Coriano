@@ -1,4 +1,4 @@
-import { CommunityGroup, DaySchedule, MassTime, NoticeItem } from '../types';
+import { ChurchMasses, CommunityGroup, DaySchedule, NoticeItem } from '../types';
 
 export const SITE_INFO = {
   title: 'Parrocchia Coriano',
@@ -7,47 +7,42 @@ export const SITE_INFO = {
   address: 'Via Libero Pedrelli, 2, 47853 Coriano RN',
   phone: '0541657167',
   email: 'segreteriacoriano@gmail.com',
-  secretaryHours: 'Lun – Ven dalle 9.30 alle 12.00',
+  secretaryHours: 'lun – ven dalle 9.30 alle 12.00',
   donOsvaldo: 'Don Osvaldo',
 };
 
-export const PREFESTIVE_MASSES: MassTime[] = [
-  { churchName: 'SS. BIAGIO E SIMEONE (MONTESCUDO)', time: '17.00', type: 'prefestiva' },
-  { churchName: 'S. GIOVANNI BATTISTA (CERASOLO)', time: '17.30', type: 'prefestiva' },
-  { churchName: 'S. ANDREA IN BESANIGO', time: '17.30', type: 'prefestiva' },
-  { churchName: 'S. SALVATORE', time: '17.00 (inverno) 18.00 (estate)', type: 'prefestiva' },
-  { churchName: 'S. GIOVANNI BATTISTA (CROCE)', time: '18.00 (da 01/01 a 30/06)', type: 'prefestiva' },
-  { churchName: 'S. SAVINO', time: '18.00 (da 01/07 a 31/12)', type: 'prefestiva' },
-  { churchName: 'SUORE A GAIOFANA', time: '18.00 (solare) 18.30 (legale)', type: 'prefestiva' },
-  { churchName: 'S. MARIA MATER ECCLESIAE (1°MAGGIO)', time: '18.30', type: 'prefestiva' },
-  { churchName: 'S. MARIA ASSUNTA (CORIANO)', time: '18.30', type: 'prefestiva' },
-];
+// Masses of the parish church, shown first on the home and on the Orari page.
+// Weekdays must match the "Messa" slots in WEEKLY_SCHEDULE.
+export const CORIANO_MASSES = {
+  church: 'S. Maria Assunta',
+  saturday: '18.30',
+  sunday: '11.15',
+  weekdays: '18.30',
+  weekdaysNote: 'giovedì 20.30',
+};
 
-export const FESTIVE_MASSES: MassTime[] = [
-  { churchName: 'S. LORENZO IN CORREGIANO', time: '8:00', type: 'festiva' },
-  { churchName: 'S. MARIA IN CERRETO', time: '8:00', type: 'festiva' },
-  { churchName: 'S. MARIA MATER ECCLESIAE (1°MAGGIO)', time: '8:30', type: 'festiva' },
-  { churchName: 'SANTUARIO VALLIANO', time: '9:00', type: 'festiva' },
-  { churchName: 'S. APOLLINARE (S. MARIA DEL PIANO)', time: '9:00', type: 'festiva' },
-  { churchName: 'S. MARIA (CASALECCHIO)', time: '9:00', type: 'festiva' },
-  { churchName: 'S. GIOVANNI EVANGELISTA (PASSANO)', time: '9:00', type: 'festiva' },
-  { churchName: 'MULAZZANO', time: '9:30', type: 'festiva' },
-  { churchName: 'SUORE GAIOFANA', time: '9:30', type: 'festiva' },
-  { churchName: 'SS. PIETRO E PAOLO (TRARIVI)', time: '9:30', type: 'festiva' },
-  { churchName: 'S. SALVATORE', time: '10:00', type: 'festiva' },
-  { churchName: 'S. INNOCENZA V. E M. (MONTETAURO)', time: '10:00', type: 'festiva' },
-  { churchName: 'S. PATRIGNANO', time: '10:00', type: 'festiva' },
-  { churchName: 'S. MARTINO MONTE L’ABATE', time: '10:00', type: 'festiva' },
-  { churchName: 'S. LORENZO IN CORREGIANO', time: '11:00', type: 'festiva' },
-  { churchName: 'SS. BIAGIO E SIMEONE (MONTESCUDO)', time: '11:00', type: 'festiva' },
-  { churchName: 'S. SAVINO', time: '11:00 (da 01/01 a 30/06)', type: 'festiva' },
-  { churchName: 'S. GIOVANNI BATTISTA (CROCE)', time: '11:00 (da 01/07 a 31/12)', type: 'festiva' },
-  { churchName: 'S. GIOVANNI BATTISTA (CERASOLO)', time: '11:15', type: 'festiva' },
-  { churchName: 'S. M. ASSUNTA (CORIANO)', time: '11:15', type: 'festiva' },
-  { churchName: 'S. ANDREA IN BESANIGO', time: '11:15', type: 'festiva' },
-  { churchName: 'S. MARIA IN CERRETO', time: '11:15', type: 'festiva' },
-  { churchName: 'S. MARIA MATER ECCLESIAE (1°MAGGIO)', time: '11:15', type: 'festiva' },
-  { churchName: 'OSPEDALETTO', time: '11:15', type: 'festiva' },
+// Other churches of the pastoral zone, in alphabetical order of `place`.
+export const ZONE_CHURCHES: ChurchMasses[] = [
+  { place: '1° Maggio', church: 'S. Maria Mater Ecclesiae', saturday: [{ time: '18.30' }], sunday: [{ time: '8.30' }, { time: '11.15' }] },
+  { place: 'Casalecchio', church: 'S. Maria', saturday: [], sunday: [{ time: '9.00' }] },
+  { place: 'Cerasolo', church: 'S. Giovanni Battista', saturday: [{ time: '17.30' }], sunday: [{ time: '11.15' }] },
+  { place: 'Croce', church: 'S. Giovanni Battista', saturday: [{ time: '18.00', note: 'gen – giu' }], sunday: [{ time: '11.00', note: 'lug – dic' }] },
+  { place: 'Gaiofana', church: 'Suore', saturday: [{ time: '18.00', note: 'ora solare' }, { time: '18.30', note: 'ora legale' }], sunday: [{ time: '9.30' }] },
+  { place: 'Montescudo', church: 'Ss. Biagio e Simeone', saturday: [{ time: '17.00' }], sunday: [{ time: '11.00' }] },
+  { place: 'Montetauro', church: 'S. Innocenza V. e M.', saturday: [], sunday: [{ time: '10.00' }] },
+  { place: 'Mulazzano', saturday: [], sunday: [{ time: '9.30' }] },
+  { place: 'Ospedaletto', saturday: [], sunday: [{ time: '11.15' }] },
+  { place: 'Passano', church: 'S. Giovanni Evangelista', saturday: [], sunday: [{ time: '9.00' }] },
+  { place: 'S. Andrea in Besanigo', saturday: [{ time: '17.30' }], sunday: [{ time: '11.15' }] },
+  { place: 'S. Lorenzo in Correggiano', saturday: [], sunday: [{ time: '8.00' }, { time: '11.00' }] },
+  { place: 'S. Maria del Piano', church: 'S. Apollinare', saturday: [], sunday: [{ time: '9.00' }] },
+  { place: 'S. Maria in Cerreto', saturday: [], sunday: [{ time: '8.00' }, { time: '11.15' }] },
+  { place: "S. Martino Monte l'Abate", saturday: [], sunday: [{ time: '10.00' }] },
+  { place: 'S. Patrignano', saturday: [], sunday: [{ time: '10.00' }] },
+  { place: 'S. Salvatore', saturday: [{ time: '17.00', note: 'inverno' }, { time: '18.00', note: 'estate' }], sunday: [{ time: '10.00' }] },
+  { place: 'S. Savino', saturday: [{ time: '18.00', note: 'lug – dic' }], sunday: [{ time: '11.00', note: 'gen – giu' }] },
+  { place: 'Santuario di Valliano', saturday: [], sunday: [{ time: '9.00' }] },
+  { place: 'Trarivi', church: 'Ss. Pietro e Paolo', saturday: [], sunday: [{ time: '9.30' }] },
 ];
 
 export const WEEKLY_SCHEDULE: DaySchedule[] = [

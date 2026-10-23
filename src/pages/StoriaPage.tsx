@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { PageId, StoriaBlock, StoriaContent, StoriaImage, StoriaLang, StoriaSection } from '../types';
 import { STORIA_IT } from '../data/storiaContent';
 import { STORIA_EN } from '../data/storiaContent.en';
+import { scrollBehavior } from '../utils/motion';
 
 const CONTENT: Record<StoriaLang, StoriaContent> = { it: STORIA_IT, en: STORIA_EN };
 
@@ -16,16 +17,16 @@ const TEXT_COL = 'max-w-3xl space-y-5';
 
 // The hash is used for routing, so chapter links scroll instead of using #anchors.
 const scrollToId = (id: string) => {
-  document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  document.getElementById(id)?.scrollIntoView({ behavior: scrollBehavior(), block: 'start' });
 };
 
 const Block: React.FC<{ block: StoriaBlock }> = ({ block }) => {
   if (block.type === 'quote') {
     return (
-      <blockquote className="border-l-4 border-[#467FF7] bg-[#F9FAFD] rounded-r-2xl px-5 py-4 sm:px-6 sm:py-5">
+      <blockquote className="border-l-4 border-[#2358CD] bg-[#F9FAFD] rounded-r-2xl px-5 py-4 sm:px-6 sm:py-5">
         <p className="italic text-[#1C244B] leading-relaxed">«{block.text}»</p>
         {block.author && (
-          <footer className="mt-2 text-sm font-semibold text-[#467FF7]">{block.author}</footer>
+          <footer className="mt-2 text-sm font-semibold text-[#2358CD]">{block.author}</footer>
         )}
       </blockquote>
     );
@@ -40,9 +41,13 @@ const Block: React.FC<{ block: StoriaBlock }> = ({ block }) => {
         <ul className="space-y-5">
           {block.items.map((item, i) => (
             <li key={i} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 sm:p-6">
-              {item.title && (
-                <h5 className="font-semibold text-lg text-[#1C244B] mb-2">{item.title}</h5>
-              )}
+              {item.title &&
+                // One level below the list heading, or below the section h3 when there is none
+                (block.heading ? (
+                  <h5 className="font-semibold text-lg text-[#1C244B] mb-2">{item.title}</h5>
+                ) : (
+                  <h4 className="font-semibold text-lg text-[#1C244B] mb-2">{item.title}</h4>
+                ))}
               <p className="leading-relaxed">{item.text}</p>
             </li>
           ))}
@@ -69,7 +74,7 @@ const PhotoCard: React.FC<{
         src={image.src}
         alt={image.caption}
         loading="lazy"
-        className="w-full h-full object-cover object-top hover:scale-105 transition-transform duration-300"
+        className="w-full h-full object-cover object-top motion-safe:hover:scale-105 transition-transform duration-300"
       />
     </button>
     <figcaption className="p-5 text-sm text-[#324A6D] leading-snug">{image.caption}</figcaption>
@@ -112,7 +117,7 @@ export const StoriaPage: React.FC<StoriaPageProps> = ({ onNavigate }) => {
           <button
             onClick={() => setLang(lang === 'it' ? 'en' : 'it')}
             aria-label={ui.switchAria}
-            className="px-4 py-2 rounded-full bg-white text-sm font-semibold tracking-wide text-[#1C244B] shadow-md hover:text-[#467FF7] transition-colors cursor-pointer"
+            className="px-4 py-2 rounded-full bg-white text-sm font-semibold tracking-wide text-[#1C244B] shadow-md hover:text-[#2358CD] transition-colors cursor-pointer"
           >
             {ui.switchLabel}
           </button>
@@ -143,7 +148,7 @@ export const StoriaPage: React.FC<StoriaPageProps> = ({ onNavigate }) => {
                 key={m.year}
                 className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4 lg:text-center"
               >
-                <p className="font-bold text-2xl text-[#467FF7]">{m.year}</p>
+                <p className="font-bold text-2xl text-[#2358CD]">{m.year}</p>
                 <p className="text-sm leading-snug mt-1">{m.text}</p>
               </li>
             ))}
@@ -158,9 +163,9 @@ export const StoriaPage: React.FC<StoriaPageProps> = ({ onNavigate }) => {
             <button
               key={chapter.id}
               onClick={() => scrollToId(chapter.id)}
-              className="px-4 py-2 rounded-full border border-[#B4D4DC] bg-white text-sm font-medium text-[#1C244B] hover:border-[#467FF7] hover:text-[#467FF7] transition-colors cursor-pointer"
+              className="px-4 py-2 rounded-full border border-[#B4D4DC] bg-white text-sm font-medium text-[#1C244B] hover:border-[#2358CD] hover:text-[#2358CD] transition-colors cursor-pointer"
             >
-              <span className="text-[#467FF7] font-semibold mr-1.5">{chapter.number}.</span>
+              <span className="text-[#2358CD] font-semibold mr-1.5">{chapter.number}.</span>
               {chapter.title}
             </button>
           ))}
@@ -181,7 +186,7 @@ export const StoriaPage: React.FC<StoriaPageProps> = ({ onNavigate }) => {
             <div className="max-w-6xl mx-auto space-y-10">
               <header className={TEXT_COL}>
                 <div className="space-y-2">
-                  <p className="font-semibold text-[#467FF7] tracking-widest uppercase text-sm">
+                  <p className="font-semibold text-[#2358CD] tracking-widest uppercase text-sm">
                     {ui.chapterLabel} {chapter.number}
                   </p>
                   <h2 className="font-sans font-bold text-3xl sm:text-4xl text-[#1C244B]">

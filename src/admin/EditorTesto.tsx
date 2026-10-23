@@ -67,11 +67,11 @@ export const EditorTesto: React.FC<EditorTestoProps> = ({ valore, onCambia }) =>
   };
 
   const classeBottone = (attivo: boolean) =>
-    `p-2 rounded-lg transition-colors ${attivo ? 'bg-[#467FF7] text-white' : 'text-[#1C244B] hover:bg-gray-100'}`;
+    `p-2 rounded-lg transition-colors ${attivo ? 'bg-[#2358CD] text-white' : 'text-[#1C244B] hover:bg-gray-100'}`;
   const nonPerdereFocus = (e: React.MouseEvent) => e.preventDefault();
 
   return (
-    <div className="rounded-xl border border-gray-200 focus-within:border-[#467FF7] bg-white">
+    <div className="rounded-xl border border-gray-200 focus-within:border-[#2358CD] bg-white">
       <div className="flex gap-1 border-b border-gray-100 p-1.5">
         <button type="button" title="Grassetto" aria-label="Grassetto" aria-pressed={stato?.grassetto}
           className={classeBottone(!!stato?.grassetto)} onMouseDown={nonPerdereFocus}

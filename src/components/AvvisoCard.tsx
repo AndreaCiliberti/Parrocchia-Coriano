@@ -12,7 +12,7 @@ export const AvvisoCard: React.FC<AvvisoCardProps> = ({ avviso, srcImmagine = av
     <article className="bg-[#F9FAFD] rounded-3xl p-6 sm:p-10 border border-gray-100 shadow-sm space-y-6">
       {srcImmagine && (
         <div className="rounded-2xl overflow-hidden shadow-sm max-w-2xl mx-auto">
-          <img src={srcImmagine} alt={avviso.titolo} className="w-full h-auto object-contain" />
+          <img loading="lazy" src={srcImmagine} alt={avviso.titolo} className="w-full h-auto object-contain" />
         </div>
       )}
       <div className="space-y-4">
