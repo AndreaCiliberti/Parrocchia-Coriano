@@ -205,7 +205,7 @@ export const PHOTO_ALBUMS: PhotoAlbum[] = [
   {
     id: 'pellegrinaggio-valliano-2026',
     title: 'Pellegrinaggio a Valliano – Ottobre 2026',
-    photos: [1, 2, 3, 4, 5, 6].map((n) => `/images/pellegrinaggio-valliano-2026-${n}.jpg`),
+    photos: [1, 2, 3, 4, 5, 6, 7].map((n) => `/images/pellegrinaggio-valliano-2026-${n}.jpg`),
   },
   {
     id: 'campo-lavoro-2026',
