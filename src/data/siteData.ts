@@ -1,4 +1,4 @@
-import { ChurchMasses, CommunityGroup, DaySchedule, NoticeItem } from '../types';
+import { ChurchMasses, CommunityGroup, DaySchedule, NoticeItem, PhotoAlbum } from '../types';
 
 export const SITE_INFO = {
   title: 'Parrocchia Coriano',
@@ -198,4 +198,20 @@ export const CAMPO_LAVORO_PHOTOS = [
   '/images/campo-lavoro-2026-3-1024x768.jpeg',
   '/images/campo-lavoro-2026-2.jpeg',
   '/images/campo-lavoro-2026-1-1024x683.jpeg',
+];
+
+// Albums shown on the Foto page, newest first
+export const PHOTO_ALBUMS: PhotoAlbum[] = [
+  {
+    id: 'pellegrinaggio-valliano-2026',
+    title: 'Pellegrinaggio a Valliano – Ottobre 2026',
+    photos: [1, 2, 3, 4, 5, 6].map((n) => `/images/pellegrinaggio-valliano-2026-${n}.jpg`),
+  },
+  {
+    id: 'campo-lavoro-2026',
+    title: 'Campo lavoro 2026',
+    text: 'Una bellissima esperienza! Due giorni intensi di lavoro ma anche di gioia. La bellezza di rimboccarsi le maniche per fare qualcosa di buono per i nostri fratelli più svantaggiati! Un grande grazie a tutti quelli che hanno contribuito alla riuscita di questo momento. Solo con il mercatino sono stati incassati in due giorni 2000 euro. È bello vedere che la Chiesa è anche mettersi a servizio (diaconia) degli altri. Il Signore ci benedica!',
+    author: 'Don Osvaldo',
+    photos: CAMPO_LAVORO_PHOTOS,
+  },
 ];

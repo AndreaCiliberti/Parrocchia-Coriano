@@ -132,3 +132,12 @@ export interface RichiestaPubblica {
   nuoveImmagini: NuovaImmagine[];
   sha: string;
 }
+
+/** An event on the Foto page: title, optional text and signature, photos. */
+export interface PhotoAlbum {
+  id: string;
+  title: string;
+  text?: string;
+  author?: string;
+  photos: string[];
+}
