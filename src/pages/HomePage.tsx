@@ -1,11 +1,14 @@
 import React from 'react';
 import { PageId, type FileAvvisi } from '../types';
-import { CORIANO_MASSES } from '../data/siteData';
+import { CAMPO_LAVORO_PHOTOS, CORIANO_MASSES } from '../data/siteData';
 import datiAvvisi from '../data/avvisi.json';
 import { estratto, soloPubblicati } from '../data/avvisiPubblici';
 
 // Avvisi have no date: the first ones in avvisi.json are the ones shown first on the Avvisi page.
 const ultimiAvvisi = soloPubblicati((datiAvvisi as FileAvvisi).avvisi).slice(0, 3);
+
+// Four campo lavoro photos with people in the foreground
+const FOTO_IN_HOME = [2, 4, 9, 11].map((i) => CAMPO_LAVORO_PHOTOS[i]);
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -71,36 +74,69 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 2. SECTION: ULTIMI AVVISI (from avvisi.json) */}
       <section
         aria-labelledby="home-avvisi"
-        className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100"
+        className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#1C244B] text-[#F4F6FB]"
       >
         <div className="max-w-3xl mx-auto">
-          <h2 id="home-avvisi" className="font-sans font-bold text-3xl sm:text-4xl text-[#1C244B]">
+          <h2 id="home-avvisi" className="font-sans font-bold text-3xl sm:text-4xl">
             Avvisi
           </h2>
           {ultimiAvvisi.length > 0 ? (
-            <ul className="mt-8 divide-y divide-gray-200 border-y border-gray-200">
+            <ul className="mt-8 divide-y divide-[#F4F6FB]/20 border-y border-[#F4F6FB]/20">
               {ultimiAvvisi.map((avviso) => (
                 <li key={avviso.id} className="py-6">
-                  <h3 className="font-sans font-semibold text-xl text-[#1C244B]">{avviso.titolo}</h3>
-                  <p className="mt-2 text-base sm:text-lg text-[#324A6D] leading-relaxed">
+                  <h3 className="font-sans font-semibold text-xl">{avviso.titolo}</h3>
+                  <p className="mt-2 text-base sm:text-lg text-[#F4F6FB]/85 leading-relaxed">
                     {avviso.descrizioneBreve || estratto(avviso.testo, 180)}
                   </p>
                 </li>
               ))}
             </ul>
           ) : (
-            <p className="mt-6 text-lg text-[#324A6D]">Al momento non ci sono avvisi.</p>
+            <p className="mt-6 text-lg text-[#F4F6FB]/85">Al momento non ci sono avvisi.</p>
           )}
           <button
             onClick={() => onNavigate('avvisi')}
-            className="btn-elementor cursor-pointer mt-8"
+            className="btn-elementor btn-chiaro cursor-pointer mt-8 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#F4F6FB]"
           >
             {ultimiAvvisi.length > 0 ? 'Leggi tutti gli avvisi' : 'Vai agli avvisi'}
           </button>
         </div>
       </section>
 
-      {/* 3. SECTION: VITA DELLA COMUNITÀ */}
+      {/* 3. SECTION: FOTO DELLA COMUNITÀ (people-first photos from the Foto page) */}
+      <section
+        aria-labelledby="home-foto"
+        className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-white border-b border-gray-100"
+      >
+        <div className="max-w-3xl mx-auto">
+          <h2 id="home-foto" className="font-sans font-bold text-3xl sm:text-4xl text-[#1C244B]">
+            Foto della comunità
+          </h2>
+          <p className="mt-3 text-lg text-[#324A6D] leading-relaxed">
+            Campo lavoro 2026: due giorni di lavoro e di gioia per i fratelli più svantaggiati.
+          </p>
+          <ul className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {FOTO_IN_HOME.map((src) => (
+              <li key={src}>
+                <img
+                  loading="lazy"
+                  src={src}
+                  alt=""
+                  className="w-full aspect-square object-cover rounded-2xl"
+                />
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={() => onNavigate('immagini-da-una-comunita')}
+            className="btn-elementor cursor-pointer mt-8"
+          >
+            Guarda tutte le foto
+          </button>
+        </div>
+      </section>
+
+      {/* 4. SECTION: VITA DELLA COMUNITÀ */}
       <section className="py-16 lg:py-24 px-4 sm:px-6 lg:px-8 bg-[#F9FAFD] border-b border-gray-100">
         <div className="max-w-3xl mx-auto space-y-10">
           <div className="space-y-3">

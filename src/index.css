@@ -58,6 +58,17 @@ body {
   box-shadow: 0 6px 18px rgba(35, 88, 205, 0.35);
 }
 
+/* Light variant for dark backgrounds (e.g. the Avvisi band on the home) */
+.btn-elementor.btn-chiaro {
+  background-color: #F4F6FB;
+  color: #1C244B;
+  box-shadow: none;
+}
+
+.btn-elementor.btn-chiaro:hover {
+  background-color: #FFFFFF;
+}
+
 /* Testo degli avvisi (HTML da dashboard: p, strong, a, ul, li) */
 .testo-avviso p + p,
 .testo-avviso p + ul,
