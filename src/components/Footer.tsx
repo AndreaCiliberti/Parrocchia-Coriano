@@ -4,6 +4,16 @@ import { PageLink } from './PageLink';
 import { SITE_INFO } from '../data/siteData';
 import { scrollBehavior } from '../utils/motion';
 
+const FOOTER_PAGES: { page: PageId; label: string }[] = [
+  { page: 'orari-messe', label: 'Orari Messe' },
+  { page: 'avvisi', label: 'Avvisi' },
+  { page: 'vita-comunita', label: 'Orari settimanali' },
+  { page: 'comunita-parrocchiale', label: 'Gruppi' },
+  { page: 'immagini-da-una-comunita', label: 'Foto' },
+  { page: 'storia', label: 'Storia' },
+  { page: 'contatti', label: 'Contatti' },
+];
+
 interface FooterProps {
   onNavigate: (page: PageId) => void;
 }
@@ -17,77 +27,25 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="font-sans text-[#324A6D]">
       {/* Upper footer with the authentic soft blue background (#B4D4DC) */}
-      <div className="bg-[#B4D4DC] py-12 px-4 sm:px-6 lg:px-8 border-t border-[#a2c9d2]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 text-sm">
-          {/* Col 1: Pagine */}
+      <div className="bg-[#B4D4DC] py-12 border-t border-[#a2c9d2]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[repeat(4,auto)] lg:justify-between gap-x-8 gap-y-10 text-sm">
+          {/* Col 1: Pagine, on two columns */}
           <div>
             <h3 className="font-semibold text-lg text-[#1C244B] mb-4">
               Pagine
             </h3>
-            <ul className="space-y-2 text-[#324A6D]">
-              <li>
-                <PageLink 
-                  page="orari-messe" 
-                  onNavigate={handleNav} 
-                  className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
-                >
-                  Orari Messe
-                </PageLink>
-              </li>
-              <li>
-                <PageLink 
-                  page="avvisi" 
-                  onNavigate={handleNav} 
-                  className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
-                >
-                  Avvisi
-                </PageLink>
-              </li>
-              <li>
-                <PageLink 
-                  page="vita-comunita" 
-                  onNavigate={handleNav} 
-                  className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
-                >
-                  Orari settimanali
-                </PageLink>
-              </li>
-              <li>
-                <PageLink 
-                  page="comunita-parrocchiale" 
-                  onNavigate={handleNav} 
-                  className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
-                >
-                  Gruppi
-                </PageLink>
-              </li>
-              <li>
-                <PageLink 
-                  page="immagini-da-una-comunita" 
-                  onNavigate={handleNav} 
-                  className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
-                >
-                  Foto
-                </PageLink>
-              </li>
-              <li>
-                <PageLink 
-                  page="storia" 
-                  onNavigate={handleNav} 
-                  className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
-                >
-                  Storia
-                </PageLink>
-              </li>
-              <li>
-                <PageLink 
-                  page="contatti" 
-                  onNavigate={handleNav} 
-                  className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
-                >
-                  Contatti
-                </PageLink>
-              </li>
+            <ul className="grid grid-flow-col grid-rows-4 gap-x-10 gap-y-2 w-max text-[#324A6D]">
+              {FOOTER_PAGES.map(({ page, label }) => (
+                <li key={page}>
+                  <PageLink
+                    page={page}
+                    onNavigate={handleNav}
+                    className="hover:text-[#2358CD] transition-colors cursor-pointer text-left"
+                  >
+                    {label}
+                  </PageLink>
+                </li>
+              ))}
             </ul>
           </div>
 

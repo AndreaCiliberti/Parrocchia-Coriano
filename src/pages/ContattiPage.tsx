@@ -22,7 +22,7 @@ export const ContattiPage: React.FC<ContattiPageProps> = ({ onNavigate }) => {
         </div>
 
         {/* Contact Info and Map Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-2 lg:auto-rows-[minmax(350px,auto)] gap-12">
           <div className="bg-[#F9FAFD] rounded-3xl p-8 border border-gray-100 shadow-sm space-y-5">
             <h2 className="font-sans font-bold text-2xl text-[#1C244B]">
               Parrocchia
@@ -50,20 +50,22 @@ export const ContattiPage: React.FC<ContattiPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Original Map Screenshot from User's Site */}
-          <div className="rounded-3xl overflow-hidden shadow-sm border border-gray-200">
+          <div className="flex rounded-3xl overflow-hidden shadow-sm border border-gray-200">
             <a
               href="https://maps.google.com/?q=Via+Libero+Pedrelli+2+Coriano+RN"
               target="_blank"
               rel="noopener noreferrer"
               title="Apri in Google Maps"
-              className="block group relative"
+              className="group flex flex-col w-full"
             >
-              <img
-                loading="lazy"
-                src="/images/Screenshot-2025-03-12-alle-16.45.09-1024x902.png"
-                alt=""
-                className="w-full h-auto object-cover group-hover:opacity-95 transition-opacity"
-              />
+              <div className="relative flex-1 aspect-[1024/902] lg:aspect-auto">
+                <img
+                  loading="lazy"
+                  src="/images/Screenshot-2025-03-12-alle-16.45.09-1024x902.png"
+                  alt=""
+                  className="absolute inset-0 w-full h-full object-cover object-[center_20%] group-hover:opacity-95 transition-opacity"
+                />
+              </div>
               <div className="p-4 bg-white text-sm font-semibold text-[#2358CD] text-center border-t border-gray-100 flex items-center justify-center gap-1.5">
                 <MapPin className="w-4 h-4" aria-hidden="true" />
                 <span>Apri la posizione su Google Maps</span>
