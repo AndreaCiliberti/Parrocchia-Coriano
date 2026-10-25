@@ -1,6 +1,14 @@
 {
   "avvisi": [
     {
+      "id": "bickvf1but",
+      "titolo": "Ognissanti e commemorazione defunti",
+      "descrizioneBreve": "Orari di Domenica 1 e Lunedi 2 Novembre",
+      "testo": "<p><strong>Domenica 1 Novembre</strong></p><p>Rosario ore 14.30 e, a seguire, Messa e visita al cimitero. <strong>Non ci sarà la messa delle 11.15.</strong></p><p><strong>Lunedi 2 Novembre</strong></p><p>Messa ore 11.15. Non ci saranno le confessioni</p>",
+      "immagine": null,
+      "bozza": false
+    },
+    {
       "id": "8gaw72om2w",
       "titolo": "Serata Missionaria",
       "descrizioneBreve": "Venerdì 30 ottobre alle 20.45 in chiesa a Coriano.",
