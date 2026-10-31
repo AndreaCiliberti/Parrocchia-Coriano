@@ -41,7 +41,7 @@ export function archivioLocale(radice: string): Archivio {
       for (const nome of immaginiOrfane(await readdir(cartellaImmagini), avvisi)) {
         await unlink(path.join(cartellaImmagini, nome));
       }
-      return hash(contenuto);
+      return { sha: hash(contenuto), commit: null };
     },
   };
 }

@@ -9,11 +9,18 @@ export interface StatoArchivio {
   sha: string;
 }
 
+export interface EsitoScrittura {
+  /** Sha nuovo del JSON, da usare come shaAtteso alla scrittura successiva. */
+  sha: string;
+  /** Commit creato su GitHub; null in modalità locale. */
+  commit: string | null;
+}
+
 export interface Archivio {
   modalita: 'github' | 'locale';
   leggi(): Promise<StatoArchivio>;
-  /** Scrive tutto in un'unica operazione e restituisce lo sha nuovo del JSON. */
-  scrivi(avvisi: Avviso[], nuoveImmagini: ImmagineDaSalvare[], shaAtteso: string): Promise<string>;
+  /** Scrive tutto in un'unica operazione. */
+  scrivi(avvisi: Avviso[], nuoveImmagini: ImmagineDaSalvare[], shaAtteso: string): Promise<EsitoScrittura>;
 }
 
 export class ConflittoError extends Error {

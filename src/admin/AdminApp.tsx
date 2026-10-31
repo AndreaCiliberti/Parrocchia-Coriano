@@ -1,13 +1,16 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ExternalLink, LogOut, Plus } from 'lucide-react';
 import type { Avviso, NuovaImmagine } from '../types';
-import { ErroreApi, caricaAvvisi, logout, pubblica } from './api';
+import { ErroreApi, caricaAvvisi, logout, pubblica, versioneOnline } from './api';
 import { cancellaBozza, leggiBozza, salvaBozza } from './bozzaLocale';
 import { EditorAvviso } from './EditorAvviso';
 import { Login } from './Login';
 import { nomeDaPercorso, nuovoId, sposta, superaLimite } from './utilita';
 
 type Fase = 'caricamento' | 'login' | 'editor' | 'errore';
+
+const INTERVALLO_CONTROLLO_MS = 10_000;
+const ATTESA_MASSIMA_MS = 5 * 60_000;
 
 interface Messaggio {
   tipo: 'ok' | 'errore' | 'info';
@@ -32,6 +35,8 @@ export const AdminApp: React.FC = () => {
   const [inPubblicazione, setInPubblicazione] = useState(false);
   const [spazioEsaurito, setSpazioEsaurito] = useState(false);
   const [messaggio, setMessaggio] = useState<Messaggio | null>(null);
+  // Incrementato a ogni pubblicazione: un'attesa vecchia smette di aggiornare il messaggio.
+  const attesaCorrente = useRef(0);
 
   const mostraErrore = useCallback((e: unknown) => {
     if (e instanceof ErroreApi && e.status === 401) {
@@ -123,6 +128,27 @@ export const AdminApp: React.FC = () => {
 
   const titoliMancanti = avvisi.some((a) => !a.titolo.trim());
 
+  // Il commit su GitHub non basta: il sito è aggiornato solo quando Vercel
+  // serve un deploy costruito da quel commit.
+  const attendiSitoAggiornato = async (commit: string) => {
+    const attesa = ++attesaCorrente.current;
+    const scadenza = Date.now() + ATTESA_MASSIMA_MS;
+    while (Date.now() < scadenza) {
+      await new Promise((r) => setTimeout(r, INTERVALLO_CONTROLLO_MS));
+      if (attesa !== attesaCorrente.current) return;
+      const online = await versioneOnline().catch(() => null);
+      if (attesa !== attesaCorrente.current) return;
+      if (online && (online.commit === null || online.commit === commit)) {
+        setMessaggio({ tipo: 'ok', testo: 'Pubblicato: il sito è aggiornato.' });
+        return;
+      }
+    }
+    setMessaggio({
+      tipo: 'errore',
+      testo: 'Le modifiche sono salvate ma il sito non si è aggiornato entro 5 minuti. Controlla su Vercel (Deployments) se l’aggiornamento è stato bloccato o è fallito.',
+    });
+  };
+
   const pubblicaTutto = async () => {
     const usate = new Set(avvisi.map((a) => a.immagine && nomeDaPercorso(a.immagine)).filter(Boolean));
     const immagini: NuovaImmagine[] = Object.entries(nuoveImmagini)
@@ -148,10 +174,12 @@ export const AdminApp: React.FC = () => {
       setModificato(false);
       setSpazioEsaurito(false);
       setVersione((v) => v + 1);
-      setMessaggio({
-        tipo: 'ok',
-        testo: esito.modalita === 'locale' ? 'Salvato in locale.' : 'Pubblicato. Il sito si aggiorna entro circa un minuto.',
-      });
+      if (esito.commit) {
+        setMessaggio({ tipo: 'info', testo: 'Salvato. Attendo che il sito si aggiorni (di solito un paio di minuti)…' });
+        void attendiSitoAggiornato(esito.commit);
+      } else {
+        setMessaggio({ tipo: 'ok', testo: 'Salvato in locale.' });
+      }
     } catch (e) {
       mostraErrore(e);
     } finally {

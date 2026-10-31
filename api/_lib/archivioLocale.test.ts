@@ -41,11 +41,11 @@ test('scrivi salva JSON e immagini nuove, elimina le orfane, restituisce il nuov
   const { sha } = await archivio.leggi();
   const nuovi = [avviso('bbbb', '/images/avvisi/nuova.jpg')];
 
-  const nuovoSha = await archivio.scrivi(nuovi, [{ nome: 'nuova.jpg', byte: Buffer.from([1, 2, 3]) }], sha);
+  const esito = await archivio.scrivi(nuovi, [{ nome: 'nuova.jpg', byte: Buffer.from([1, 2, 3]) }], sha);
 
   assert.equal(await readFile(path.join(radice, 'src/data/avvisi.json'), 'utf8'), serializza(nuovi));
   assert.deepEqual((await readdir(path.join(radice, 'public/images/avvisi'))).sort(), ['.gitkeep', 'nuova.jpg']);
-  assert.equal(nuovoSha, (await archivio.leggi()).sha);
+  assert.deepEqual(esito, { sha: (await archivio.leggi()).sha, commit: null });
 });
 
 test('sha diverso: ConflittoError e nessuna scrittura', async () => {

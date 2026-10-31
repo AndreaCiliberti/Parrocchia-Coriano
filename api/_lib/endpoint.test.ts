@@ -7,6 +7,7 @@ import { POST as login } from '../login.js';
 import { POST as logout } from '../logout.js';
 import { GET as leggiAvvisi } from '../avvisi.js';
 import { POST as pubblica } from '../pubblica.js';
+import { GET as versione } from '../versione.js';
 import { serializza } from './archivio.js';
 import { NOME_COOKIE, creaToken } from './sessione.js';
 
@@ -62,6 +63,7 @@ test('logout cancella il cookie', async () => {
 test('endpoint protetti senza cookie: 401', async () => {
   assert.equal((await leggiAvvisi(richiesta('GET', '/api/avvisi'))).status, 401);
   assert.equal((await pubblica(richiesta('POST', '/api/pubblica', { avvisi: [], nuoveImmagini: [], sha: '' }))).status, 401);
+  assert.equal((await versione(richiesta('GET', '/api/versione'))).status, 401);
 });
 
 test('lettura e pubblicazione in modalità locale, con sanificazione e nuovo sha', async () => {
@@ -77,6 +79,7 @@ test('lettura e pubblicazione in modalità locale, con sanificazione e nuovo sha
   assert.equal(r.status, 200);
   const esito = await r.json();
   assert.equal(esito.modalita, 'locale');
+  assert.equal(esito.commit, null);
   assert.equal(esito.avvisi[0].testo, '<p>Ciao</p>');
 
   const salvato = JSON.parse(await readFile(path.join(radice, 'src/data/avvisi.json'), 'utf8'));
@@ -93,4 +96,15 @@ test('richiesta non valida: 400 con messaggio', async () => {
   const r = await pubblica(richiesta('POST', '/api/pubblica', { avvisi: 'x', nuoveImmagini: [], sha: 'a' }, conCookie()));
   assert.equal(r.status, 400);
   assert.match((await r.json()).errore, /Elenco avvisi/);
+});
+
+test('versione: commit del deploy in esecuzione, null fuori da Vercel', async () => {
+  delete process.env.VERCEL_GIT_COMMIT_SHA;
+  assert.deepEqual(await (await versione(richiesta('GET', '/api/versione', undefined, conCookie()))).json(), { commit: null });
+  process.env.VERCEL_GIT_COMMIT_SHA = 'abc123';
+  try {
+    assert.deepEqual(await (await versione(richiesta('GET', '/api/versione', undefined, conCookie()))).json(), { commit: 'abc123' });
+  } finally {
+    delete process.env.VERCEL_GIT_COMMIT_SHA;
+  }
 });

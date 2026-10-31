@@ -15,9 +15,9 @@ export async function POST(request: Request): Promise<Response> {
   const avvisi = esito.dati.avvisi.map((a) => ({ ...a, testo: sanificaTesto(a.testo) }));
   try {
     const archivio = creaArchivio();
-    const nuovoSha = await archivio.scrivi(avvisi, nuoveImmagini, sha);
+    const scritto = await archivio.scrivi(avvisi, nuoveImmagini, sha);
     if (archivio.modalita === 'github') await avviaDeploy();
-    return json({ ok: true, modalita: archivio.modalita, avvisi, sha: nuovoSha });
+    return json({ ok: true, modalita: archivio.modalita, avvisi, sha: scritto.sha, commit: scritto.commit });
   } catch (e) {
     if (e instanceof ConflittoError) return json({ errore: e.message }, 409);
     console.error(e);

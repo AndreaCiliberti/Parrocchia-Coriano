@@ -6,6 +6,7 @@ const ROTTE: Record<string, string> = {
   '/api/logout': '/api/logout.ts',
   '/api/avvisi': '/api/avvisi.ts',
   '/api/pubblica': '/api/pubblica.ts',
+  '/api/versione': '/api/versione.ts',
 };
 
 type Handler = (request: Request) => Promise<Response>;

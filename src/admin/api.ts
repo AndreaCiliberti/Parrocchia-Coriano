@@ -39,6 +39,7 @@ export interface EsitoPubblicazione {
   modalita: 'github' | 'locale';
   avvisi: Avviso[];
   sha: string;
+  commit: string | null;
 }
 
 export const login = (email: string, password: string) =>
@@ -50,3 +51,5 @@ export const caricaAvvisi = () => chiama<{ avvisi: Avviso[]; sha: string }>('/ap
 
 export const pubblica = (richiesta: RichiestaPubblica) =>
   chiama<EsitoPubblicazione>('/api/pubblica', 'POST', richiesta);
+
+export const versioneOnline = () => chiama<{ commit: string | null }>('/api/versione');

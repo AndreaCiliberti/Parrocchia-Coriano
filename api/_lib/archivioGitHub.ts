@@ -107,7 +107,7 @@ export function archivioGitHub(config: ConfigGitHub, fetchFn: typeof fetch = fet
         if (e instanceof ErroreGitHub && e.status === 422) throw new ConflittoError();
         throw e;
       }
-      return blobJson.sha;
+      return { sha: blobJson.sha, commit: commit.sha };
     },
   };
 }

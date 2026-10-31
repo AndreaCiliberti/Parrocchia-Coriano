@@ -65,7 +65,7 @@ test('scrivi crea un solo commit con JSON, immagine nuova e cancellazione delle 
   const { fetchFn, chiamate } = githubFinto(rotteScrittura());
   const avvisi = [avviso('bbbb', '/images/avvisi/nuova.jpg'), avviso('cccc', '/images/avvisi/tenuta.jpg')];
 
-  const nuovoSha = await archivioGitHub(config, fetchFn).scrivi(
+  const esito = await archivioGitHub(config, fetchFn).scrivi(
     avvisi, [{ nome: 'nuova.jpg', byte: Buffer.from([1, 2, 3]) }], 'shaFile',
   );
 
@@ -82,7 +82,7 @@ test('scrivi crea un solo commit con JSON, immagine nuova e cancellazione delle 
   assert.deepEqual(commit.parents, ['testa']);
   assert.equal(commit.tree, 'albero1');
   assert.deepEqual(chiamate.find((c) => c.chiave === 'PATCH /git/refs/heads/main')!.corpo, { sha: 'commit1', force: false });
-  assert.equal(nuovoSha, 'blob1');
+  assert.deepEqual(esito, { sha: 'blob1', commit: 'commit1' });
 });
 
 test('sha diverso: ConflittoError prima di qualsiasi scrittura', async () => {
