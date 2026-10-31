@@ -68,7 +68,7 @@ Queste cartelle (e `context/info-azienda.md`, da leggere sempre prima di operare
 
 ## Notes
 
-- Deployment: code on GitHub, hosted on Vercel. The GitHub repo is **public on purpose**: on the Hobby plan Vercel blocks deploys of a private repo whose commit author is not the Vercel account owner ("Deployment was blocked"), which is what the dashboard commits look like. Never commit secrets (not WordPress/SiteGround like the old site). Live at `https://www.parrocchiacoriano.com` (the bare domain 308-redirects to www; DNS on Namecheap BasicDNS); `parrocchia-coriano.vercel.app` still works. The privacy and cookie texts in `src/data/legalContent.ts` (pages `#privacy`, `#cookie-policy`, rendered by `src/pages/LegalPage.tsx`) must stay consistent with the third-party services the site actually uses.
+- Deployment: code on GitHub, hosted on Vercel (not WordPress/SiteGround like the old site). The GitHub repo is **public on purpose**: on the Hobby plan Vercel blocks deploys of a private repo whose commit author is not the Vercel account owner ("Deployment was blocked"), which is what the dashboard commits look like. Never commit secrets. Live at `https://www.parrocchiacoriano.com` (the bare domain 308-redirects to www; DNS on Namecheap BasicDNS); `parrocchia-coriano.vercel.app` still works. The privacy and cookie texts in `src/data/legalContent.ts` (pages `#privacy`, `#cookie-policy`, rendered by `src/pages/LegalPage.tsx`) must stay consistent with the third-party services the site actually uses.
 
 - `vite.config.ts` disables HMR/file watching when `DISABLE_HMR=true` (AI Studio behaviour); leave that block as is.
 - `@google/genai`, `express`, `dotenv` and `GEMINI_API_KEY` are template leftovers: nothing in `src/` uses them yet.
