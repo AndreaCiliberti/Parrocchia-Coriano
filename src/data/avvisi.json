@@ -1,20 +1,20 @@
 {
   "avvisi": [
     {
+      "id": "tebb60kkm5",
+      "titolo": "Orari messe zona pastorale",
+      "descrizioneBreve": "Orari messe della zona pastorale",
+      "testo": "",
+      "immagine": "/images/avvisi/orari-messe-zona-pastorale-tebb60kkm5-1okm.jpg",
+      "bozza": true
+    },
+    {
       "id": "bickvf1but",
       "titolo": "Ognissanti e commemorazione defunti",
       "descrizioneBreve": "Orari di Sabato 31, Domenica 1 e Lunedi 2 Novembre",
       "testo": "<p><strong>Sabato 31 Ottobre</strong></p><p>Ore 18.30 Messa prefestiva </p><p></p><p><strong>Domenica 1 Novembre</strong></p><p>Rosario ore 14.30 e, a seguire, Messa e visita al cimitero. <strong>Non ci sarà la messa delle 11.15.</strong></p><p></p><p><strong>Lunedi 2 Novembre</strong></p><p>Messa ore 11.15. Non ci saranno le confessioni</p><p></p><p><strong>Ottavario dei defunti</strong></p><p>Tutti i giovedi del mese alle 20.30</p>",
       "immagine": "/images/avvisi/ognissanti-e-commemorazione-defunti-bickvf1but-iuoz.jpg",
       "bozza": false
-    },
-    {
-      "id": "8gaw72om2w",
-      "titolo": "Serata Missionaria",
-      "descrizioneBreve": "Venerdì 30 ottobre alle 20.45 in chiesa a Coriano.",
-      "testo": "<p>Veglia di preghiera dedicata alle missioni.<br /><br />Momento di preghiera animato da canti e con collegamenti con coloro che sono attivi nelle missioni riminesi presenti in Albania, Mozambico, Venezuela, Zimbawe che offriranno la loro testimonianza.</p>",
-      "immagine": "/images/avvisi/serata-missionaria-8gaw72om2w-gsk9.jpg",
-      "bozza": true
     },
     {
       "id": "dona8x1000",
